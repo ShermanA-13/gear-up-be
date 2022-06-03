@@ -3,4 +3,9 @@ class Api::V1::TripsController < ApplicationController
     trips = Trip.all
     render json: TripSerializer.new(trips)
   end
+
+  def show
+    trip = Trip.find(params[:id])
+    render json: TripSerializer.new(trip)
+  end
 end
