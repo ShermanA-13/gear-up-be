@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   belongs_to :user
   has_many :trip_items, dependent: :destroy
