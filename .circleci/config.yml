@@ -11,47 +11,9 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-      # Store bundle cache
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
-  test:
-    parallelism: 3
-    docker:
-      - image: cimg/ruby:2.7-node
-      - image: circleci/postgres:9.5-alpine
-        environment:
-          POSTGRES_USER: gear-up-be
-          POSTGRES_DB: gear_up_be_test
-          POSTGRES_PASSWORD: ""
-    environment:
-      BUNDLE_JOBS: "3"
-      BUNDLE_RETRY: "3"
-      PGHOST: 127.0.0.1
-      PGUSER: gear-up-be
-      PGPASSWORD: ""
-      RAILS_ENV: test
-    steps:
-      - checkout
-      - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
-          name: Database setup
-          command: bundle exec rails db:schema:load --trace
-      # Run rspec in parallel
-      - ruby/rspec-test
-      - ruby/rubocop-check
 
 workflows:
-  version: 2
-  build_and_test:
+  version: 1.0.1
+  build:
     jobs:
       - build
-      - test:
-          requires:
-            - build
