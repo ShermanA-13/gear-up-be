@@ -43,15 +43,15 @@ jobs:
           command: 'dockerize -wait tcp://localhost:5432 -timeout 1m'
           name: Wait for DB
       - run:
-          command: 'rails db:create'
+          command: 'bundle exec rails db:create'
           name: Database creation
       - run:
-          command: 'rails db:schema:load --trace'
+          command: 'bundle exec rails db:schema:load --trace'
           name: Database setup
       - ruby/rspec-test:
           include: spec/**/*_spec.rb
 workflows:
-  version: 1.1.5
+  version: 1.1.6
   build_and_test:
     jobs:
       - build
