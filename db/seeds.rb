@@ -20,6 +20,6 @@
 # FactoryBot.create_list(:item, 5, user: users[9])
 
 # FactoryBot.create_list(:trip, 3)
-User.create!{ first_name: "something", last_name:"this", email: "email@email.com"}
-User.create!{ first_name: "asda", last_name:"this", email: "cheese@email.com"}
-User.create!{ first_name: "monkey", last_name:"this", email: "foo@email.com"}
+User.create!( first_name: "something", last_name:"this", email: "email@email.com")
+User.create!( first_name: "asda", last_name:"this", email: "cheese@email.com")
+User.create!( first_name: "monkey", last_name:"this", email: "foo@email.com")
