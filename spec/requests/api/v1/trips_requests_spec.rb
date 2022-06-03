@@ -54,4 +54,32 @@ RSpec.describe 'Trips API' do
       expect(trip[:attributes][:start_date]).to be_a String
     end
   end
+
+  describe 'post trip' do
+    it 'can create a new trip' do
+      trip_params = {
+        name: "Climbing",
+        location: "Yosemite",
+        description: "YOLO",
+        host_id: 4,
+        start_date: Date.today,
+        end_date: Date.today.next_day
+      }
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post "/api/v1/items", headers: headers, params: JSON.generate(trip: trip_params)
+
+      new_trip = Trip.last
+
+      expect(response).to be_successful
+      expect(response.status).to eq(201)
+
+      expect(new_trip.name).to eq(trip_params[:name])
+      expect(new_trip.location).to eq(trip_params[:location])
+      expect(new_trip.description).to eq(trip_params[:description])
+      expect(new_trip.host_id).to eq(trip_params[:host_id])
+      expect(new_trip.start_date).to eq(trip_params[:start_date])
+      expect(new_trip.end_date).to eq(trip_params[:end_date])
+    end
+  end
 end
