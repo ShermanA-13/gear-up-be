@@ -43,7 +43,7 @@ jobs:
           command: 'dockerize -wait tcp://localhost:5432 -timeout 1m'
           name: Wait for DB
       - run:
-          command: 'rails db:{create,migrate}'
+          command: 'rails db:create db:migrate'
           name: Database creation
       - run:
           command: 'rails db:schema:load --trace'
