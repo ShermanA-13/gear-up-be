@@ -67,7 +67,7 @@ RSpec.describe 'Trips API' do
       }
 
       headers = {"CONTENT_TYPE" => "application/json"}
-      post "/api/v1/items", headers: headers, params: JSON.generate(trip: trip_params)
+      post "/api/v1/trips", headers: headers, params: JSON.generate(trip: trip_params)
 
       new_trip = Trip.last
 
