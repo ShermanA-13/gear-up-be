@@ -1,35 +1,35 @@
-__x__ Wrote Tests
-__x__ Implemented
-__x__ Reviewed
+____ Wrote Tests
+____ Implemented
+____ Reviewed
 
 
 ## Necessary checkmarks:
-- [x] All Tests are Passing
-- [x] The code will run locally
+- [] All Tests are Passing
+- [] The code will run locally
 
 ## Type of change
-- [x] New feature
+- [] New feature
 - [] Bug Fix
 
 ## Implements/Fixes:
-*Test: User validations + relationships
+* 
 
 ## Check the correct boxes
-- [x] This broke nothing
-- [x] All Tests are Passing
-- [x] The code will run locally
+- [] This broke nothing
+- [] All Tests are Passing
+- [] The code will run locally
 
 ## Testing Changes
-- [x] Tests have been added
+- [] Tests have been added
 - [] No Tests have been changed
 - [] Some Tests have been changed
 - [] All of the Tests have been changed(Please describe what in the world happened)
 
 ## Checklist:
-- [x] My code has no unused/commented out code
-- [x] I have reviewed my code
+- [] My code has no unused/commented out code
+- [] I have reviewed my code
 - [] I have commented my code, particularly in hard-to-understand areas
-- [x] I have fully tested my code
-- [x] I have removed any testing syntax (save_and_open_page/pry) in my spec files
+- [] I have fully tested my code
+- [] I have removed any testing syntax (save_and_open_page/pry) in my spec files
 
 ## Please include a link to a gif of how you feel about this branch:
