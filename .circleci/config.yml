@@ -18,7 +18,7 @@ jobs:
       - checkout
       - ruby/install-deps
       - ruby/rubocop-check:
-          format: progress
+          format: standard
           label: Inspecting with Rubocop
 workflows:
   version: 1.0.2
