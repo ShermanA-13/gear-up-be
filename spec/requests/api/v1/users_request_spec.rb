@@ -61,5 +61,27 @@ RSpec.describe "Users API" do
       expect(new_user.last_name).to eq(user_params[:last_name])
       expect(new_user.email).to eq(user_params[:email])
     end
+
+    it 'returns an existing user if there is one already' do
+      User.create!(first_name: "Jack", last_name: "Sparrow", email: "tHeRuMiSgOnE@pirates.org")
+
+      users = create_list(:user, 2)
+
+      expect(User.all.count).to eq(3)
+
+      user_params = {
+        first_name: "Jack",
+        last_name: "Sparrow",
+        email: "tHeRuMiSgOnE@pirates.org"
+      }
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v1/users", headers: headers, params: JSON.generate(user: user_params)
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+      expect(User.all.count).to eq(3)
+    end
   end
 end
