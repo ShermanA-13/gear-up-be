@@ -12,19 +12,19 @@ RSpec.describe 'Trips API' do
 
       expect(response).to be_successful
       expect(trips.count).to eq(5)
-
+      
       trips.each do |trip|
         expect(trip).to have_key(:id)
         expect(trip[:id]).to be_a String
 
         expect(trip[:type]).to eq("trip")
 
-        expect(item[:attributes][:name]).to be_a String
-        expect(item[:attributes][:description]).to be_a String
-        expect(item[:attributes][:location]).to be_a String
-        expect(item[:attributes][:host_id]).to be_an Integer
-        expect(item[:attributes][:end_date]).to be_a Date
-        expect(item[:attributes][:start_date]).to be_a Date
+        expect(trip[:attributes][:name]).to be_a String
+        expect(trip[:attributes][:description]).to be_a String
+        expect(trip[:attributes][:location]).to be_a String
+        expect(trip[:attributes][:host_id]).to be_an Integer
+        expect(trip[:attributes][:end_date]).to be_a String
+        expect(trip[:attributes][:start_date]).to be_a String
       end
     end
   end
