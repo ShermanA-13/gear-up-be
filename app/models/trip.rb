@@ -14,7 +14,7 @@ class Trip < ApplicationRecord
     end
   end
 
-  def self.users_trips(id)
+  def self.user_trips(id)
     joins(:trip_users).where(trip_users: {user_id: id})
   end
 end
