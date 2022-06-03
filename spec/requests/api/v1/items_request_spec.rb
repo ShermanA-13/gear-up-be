@@ -63,16 +63,15 @@ RSpec.describe "Items API" do
     expect(item.name).to_not eq(previous_name)
     expect(item.name).to eq("Super Dope Climbing Thing")
   end
-  #
-  # it "can destroy an item" do
-  #   item = create(:item, {merchant_id: merchant_list[2].id})
-  #   expect(Item.count).to eq(16)
-  #
-  #   delete "/api/v1/items/#{item.id}"
-  #
-  #   expect(response).to be_successful
-  #   expect(Item.count).to eq(15)
-  #   expect { Item.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
-  # end
-  #
+
+  it "can destroy an item" do
+    item = create(:item, {user_id: user.id})
+    expect(Item.count).to eq(6)
+
+    delete "/api/v1/users/#{user.id}/items/#{item.id}"
+
+    expect(response).to be_successful
+    expect(Item.count).to eq(15)
+    expect { Item.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
+  end
 end
