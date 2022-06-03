@@ -34,7 +34,7 @@ jobs:
       PGHOST: 127.0.0.1
       PGPASSWORD: ''
       PGUSER: gear-up-be
-      RAILS_ENV: test
+      RAILS_ENV: development
     parallelism: 3
     steps:
       - checkout
