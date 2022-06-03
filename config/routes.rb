@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   get "/api/v1/users/:user_id/items", to: "items#index"
   get "/api/v1/users/:user_id/items/:item_id", to: "items#show"
+  post "/api/v1/users/:user_id/items", to: "items#create"
 end

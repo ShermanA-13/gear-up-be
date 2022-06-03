@@ -29,25 +29,26 @@ RSpec.describe "Items API" do
     expect(item[:id]).to eq(items_list.first.id.to_s)
     expect(item[:id]).to_not eq(items_list.last.id.to_s)
   end
-  #
-  # it "can create a new item" do
-  #   item_params = {
-  #     name: "Ergonomic Wool Hat",
-  #     description: "Fixie cold-pressed iphone pickled.",
-  #     unit_price: 37.55,
-  #     merchant_id: merchant_list[2].id
-  #   }
-  #   headers = {"CONTENT_TYPE" => "application/json"}
-  #
-  #   post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
-  #   created_item = Item.last
-  #
-  #   expect(response).to be_successful
-  #   expect(created_item.name).to eq(item_params[:name])
-  #   expect(created_item.description).to eq(item_params[:description])
-  #   expect(created_item.unit_price).to eq(item_params[:unit_price])
-  #   expect(created_item.merchant_id).to eq(item_params[:merchant_id])
-  # end
+
+  it "can create a new item" do
+    item_params = {
+      name: "Organic Crash Pad",
+      description: "Super soft and thicc, heavy though",
+      count: 1,
+      category: 7,
+      user_id: user.id
+    }
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    post "/api/v1/users/#{user.id}/items", headers: headers, params: JSON.generate(item: item_params)
+    created_item = Item.last
+
+    expect(response).to be_successful
+    expect(created_item.name).to eq(item_params[:name])
+    expect(created_item.description).to eq(item_params[:description])
+    expect(created_item.count).to eq(item_params[:count])
+    expect(created_item.category).to eq(item_params[:category])
+  end
   #
   # it "can destroy an item" do
   #   item = create(:item, {merchant_id: merchant_list[2].id})
