@@ -9,6 +9,4 @@ RSpec.describe TripUser, type: :model do
   describe 'validations' do
     it { should validate_inclusion_of(:host).in_array([true, false]) }
   end
-
-
 end
