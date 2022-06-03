@@ -5,7 +5,7 @@ RSpec.describe "Items API" do
   let!(:items_list) { create_list :item, 5, {user_id: user.id} }
 
   it "gets all items for single user" do
-    get "/api/v1/users/:id/items"
+    get "/api/v1/users/#{user.id}/items"
     parsed = JSON.parse(response.body, symbolize_names: true)
     items = parsed[:data]
 
@@ -13,19 +13,10 @@ RSpec.describe "Items API" do
     expect(items.count).to eq(5)
 
     items.each do |item|
-      expect(item).to have_key(:id)
       expect(item[:id]).to be_a(String)
-
-      expect(item[:attributes]).to have_key(:name)
       expect(item[:attributes][:name]).to be_a(String)
-
-      expect(item[:attributes]).to have_key(:description)
       expect(item[:attributes][:description]).to be_a(String)
-
-      expect(item[:attributes]).to have_key(:count)
       expect(item[:attributes][:count]).to be_an(Integer)
-
-      expect(item[:attributes]).to have_key(:category)
       expect(item[:attributes][:category]).to be_an(Integer)
     end
   end
