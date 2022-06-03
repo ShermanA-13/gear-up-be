@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    require "pry"; binding.pry
     if User.exists?(email: params[:user][:email])
       user = User.find_by(email: params[:user][:email])
       render json: UserSerializer.new(user)
