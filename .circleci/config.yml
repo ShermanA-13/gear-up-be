@@ -43,7 +43,7 @@ jobs:
           command: 'dockerize -wait tcp://localhost:5432 -timeout 1m'
           name: Wait for DB
       - run:
-          command: 'rails db:create db:migrate'
+          command: 'rails db:create'
           name: Database creation
       - run:
           command: 'rails db:schema:load --trace'
@@ -51,7 +51,7 @@ jobs:
       - ruby/rspec-test:
           include: spec/**/*_spec.rb
 workflows:
-  version: 1.1.4
+  version: 1.1.5
   build_and_test:
     jobs:
       - build
