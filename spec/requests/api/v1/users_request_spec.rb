@@ -33,7 +33,7 @@ RSpec.describe "Users API" do
 
       expect(response).to be_successful
 
-      expect(user[:id]).to eq(users_list.first.id)
+      expect(user[:id].to_i).to eq(users_list.first.id)
       expect(user[:type]).to eq("user")
       expect(user[:attributes][:first_name]).to eq(users_list.first.first_name)
       expect(user[:attributes][:last_name]).to eq(users_list.first.last_name)
@@ -41,5 +41,25 @@ RSpec.describe "Users API" do
     end
   end
 
+  describe 'it can create a user' do
+    it 'creates a user' do
+      user_params = {
+        first_name: "Jack",
+        last_name: "Sparrow",
+        email: "tHeRuMiSgOnE@pirates.org"
+      }
 
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post "/api/v1/users", headers: headers, params: JSON.generate(user: user_params)
+
+      new_user = User.last
+
+      expect(response).to be_successful
+      expect(response.status).to eq(201)
+
+      expect(new_user.first_name).to eq(user_params[:first_name])
+      expect(new_user.last_name).to eq(user_params[:last_name])
+      expect(new_user.email).to eq(user_params[:email])
+    end
+  end
 end
