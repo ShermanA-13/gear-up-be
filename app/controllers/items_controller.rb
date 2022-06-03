@@ -20,6 +20,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    item = Item.find(params[:item_id])
+    item.destroy
+    render status: 204
+  end
+
   private
 
   def item_params
