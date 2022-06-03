@@ -1,6 +1,6 @@
 class Api::V1::TripsController < ApplicationController
   def index
-    trips = Trip.all
+    trips = Trip.users_trips(params[:user_id])
     render json: TripSerializer.new(trips)
   end
 
@@ -11,6 +11,7 @@ class Api::V1::TripsController < ApplicationController
 
   def create
     trip = Trip.new(trip_params)
+    trip.update(host_id: params[:user_id])
     if trip.save
       render json: TripSerializer.new(trip), status: :created
     end
@@ -18,6 +19,6 @@ class Api::V1::TripsController < ApplicationController
 
   private
     def trip_params
-      params.require(:trip).permit(:name, :location, :description, :host_id, :start_date, :end_date)
+      params.require(:trip).permit(:name, :location, :description, :start_date, :end_date)
     end
 end

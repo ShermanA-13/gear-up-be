@@ -13,4 +13,8 @@ class Trip < ApplicationRecord
       errors.add(:end_date, "End date can not be before start date.")
     end
   end
+
+  def self.users_trips(id)
+    joins(:trip_users).where(trip_users: {user_id: id})
+  end
 end

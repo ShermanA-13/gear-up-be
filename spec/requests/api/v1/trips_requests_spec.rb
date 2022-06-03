@@ -3,15 +3,20 @@ require 'rails_helper'
 RSpec.describe 'Trips API' do
   describe 'get all trips' do
     it 'returns all trips' do
+      user = create(:user)
       trip_list = create_list(:trip, 5)
+      user_trip1 = TripUser.create!(trip: trip_list[0], user: user, host: false)
+      user_trip2 = TripUser.create!(trip: trip_list[1], user: user, host: false)
+      user_trip3 = TripUser.create!(trip: trip_list[3], user: user, host: false)
+      user_trip4 = TripUser.create!(trip: trip_list[4], user: user, host: false)
 
-      get '/api/v1/trips'
+      get "/api/v1/users/#{user.id}/trips"
 
       trips_response = JSON.parse(response.body, symbolize_names: true)
       trips = trips_response[:data]
 
       expect(response).to be_successful
-      expect(trips.count).to eq(5)
+      expect(trips.count).to eq(4)
 
       trips.each do |trip|
         expect(trip).to have_key(:id)
@@ -57,17 +62,17 @@ RSpec.describe 'Trips API' do
 
   describe 'post trip' do
     it 'can create a new trip' do
+      user = create(:user)
       trip_params = {
         name: "Climbing",
         location: "Yosemite",
         description: "YOLO",
-        host_id: 4,
         start_date: Date.today,
         end_date: Date.today.next_day
       }
 
       headers = {"CONTENT_TYPE" => "application/json"}
-      post "/api/v1/trips", headers: headers, params: JSON.generate(trip: trip_params)
+      post "/api/v1/users/#{user.id}/trips", headers: headers, params: JSON.generate(trip: trip_params)
 
       new_trip = Trip.last
 
@@ -77,7 +82,7 @@ RSpec.describe 'Trips API' do
       expect(new_trip.name).to eq(trip_params[:name])
       expect(new_trip.location).to eq(trip_params[:location])
       expect(new_trip.description).to eq(trip_params[:description])
-      expect(new_trip.host_id).to eq(trip_params[:host_id])
+      expect(new_trip.host_id).to eq(user.id)
       expect(new_trip.start_date).to eq(trip_params[:start_date])
       expect(new_trip.end_date).to eq(trip_params[:end_date])
     end
