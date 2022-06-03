@@ -42,6 +42,7 @@ group :development, :test do
   gem "shoulda-matchers"
   gem "rspec-rails"
   gem "simplecov"
+  gem 'rspec_junit_formatter'
   gem "factory_bot_rails"
   gem "faker"
 end
