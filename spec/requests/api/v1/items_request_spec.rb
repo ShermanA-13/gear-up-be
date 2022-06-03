@@ -21,14 +21,14 @@ RSpec.describe "Items API" do
     end
   end
 
-  # it "gets one item" do
-  #   get "/api/v1/items/#{item_list.first.id}"
-  #   parsed = JSON.parse(response.body, symbolize_names: true)
-  #   item = parsed[:data]
-  #   expect(response).to be_successful
-  #   expect(item[:id]).to eq(item_list.first.id.to_s)
-  #   expect(item[:id]).to_not eq(item_list.last.id.to_s)
-  # end
+  it "gets one item for user" do
+    get "/api/v1/users/#{user.id}/items/#{items_list.first.id}"
+    parsed = JSON.parse(response.body, symbolize_names: true)
+    item = parsed[:data]
+    expect(response).to be_successful
+    expect(item[:id]).to eq(items_list.first.id.to_s)
+    expect(item[:id]).to_not eq(items_list.last.id.to_s)
+  end
   #
   # it "can create a new item" do
   #   item_params = {
