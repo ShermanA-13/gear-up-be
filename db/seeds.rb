@@ -26,8 +26,8 @@ user_3 = User.create!( first_name: "monkey", last_name:"this", email: "foo@email
 
 item_1 = Item.create!( user_id: user_1.id, name: "Water Bottle", category: "Water", count: 5)
 item_2 = Item.create!( user_id: user_1.id, name: "Trail Mix", category: "Snacks", count: 8)
-item_3 = Item.create!( user_id: user_2.id name: "Good Socks", category: "Clothes", count: 3)
-item_4 = Item.create!( user_id: user_2.id name: "Fancy Tent", category: "Tents", count: 1)
+item_3 = Item.create!( user_id: user_2.id, name: "Good Socks", category: "Clothes", count: 3)
+item_4 = Item.create!( user_id: user_2.id, name: "Fancy Tent", category: "Tents", count: 1)
 
 trip_1 = Trip.create!(
   name: "first trip",
