@@ -87,4 +87,46 @@ RSpec.describe 'Trips API' do
       expect(new_trip.end_date).to eq(trip_params[:end_date])
     end
   end
+
+  describe 'patch trips' do
+    it 'can edit a trip' do
+      trip = Trip.create(name: "Fun Days!",
+                        location: "Fun Place",
+                        start_date: Date.today,
+                        end_date: Date.today.next_day,
+                        description: "Whoop Whoop!",
+                        host_id: 4)
+
+      new_trip_edits = {
+                location: "Better Place",
+                description: "More Excitement!"
+              }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      patch "/api/v1/trips/#{trip.id}", headers: headers, params: JSON.generate(trip: new_trip_edits)
+
+      expect(response).to be_successful
+      updated_trip_response = JSON.parse(response.body, symbolize_names: true)
+      updated_trip = updated_trip_response[:data]
+      found_update = Trip.find(trip.id)
+
+      expect(updated_trip[:attributes][:name]).to eq(trip.name)
+      expect(updated_trip[:attributes][:location]).not_to eq(trip.location)
+      expect(updated_trip[:attributes][:location]).to eq("Better Place")
+      expect(updated_trip[:attributes][:start_date]).to eq(trip.start_date)
+      expect(updated_trip[:attributes][:end_date]).to eq(trip.end_date)
+      expect(updated_trip[:attributes][:host_id]).to eq(trip.host_id)
+      expect(updated_trip[:attributes][:description]).not_to eq(trip.description)
+      expect(updated_trip[:attributes][:description]).to eq("More Excitement!")
+
+      expect(found_update.name).to eq(trip.name)
+      expect(found_update.start_date).to eq(trip.start_date)
+      expect(found_update.end_date).to eq(trip.end_date)
+      expect(found_update.host_id).to eq(trip.host_id)
+      expect(found_update.description).not_to eq(trip.description)
+      expect(found_update.location).not_to eq(trip.location)
+      expect(found_update.location).to eq("Better Place")
+      expect(found_update.description).to eq("More Excitement!")
+    end
+  end
 end
