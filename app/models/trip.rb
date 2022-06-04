@@ -3,9 +3,10 @@ class Trip < ApplicationRecord
   has_many :trip_users, dependent: :destroy
   has_many :users, through: :trip_users
   has_many :items, through: :trip_items
+  belongs_to :area
 
   validate :end_date_later_than_start
-  validates_presence_of :name, :location, :start_date, :end_date, :description, :host_id
+  validates_presence_of :name, :start_date, :end_date, :description, :host_id
   validates_inclusion_of :start_date, in: Date.today..Date.today.next_year
 
   def end_date_later_than_start

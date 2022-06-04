@@ -31,7 +31,6 @@ item_4 = Item.create!( user_id: user_2.id, name: "Fancy Tent", category: "Tents"
 
 trip_1 = Trip.create!(
   name: "first trip",
-  location: "somewhere",
   start_date: Date.today,
   end_date: Date.today.next_day,
   description: "baby's first trip",
@@ -40,7 +39,6 @@ trip_1 = Trip.create!(
 
 trip_2 = Trip.create!(
   name: "boo boo trip",
-  location: "nowhere",
   start_date: Date.today,
   end_date: Date.today.next_day,
   description: "trip I guess",

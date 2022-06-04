@@ -3,7 +3,8 @@ require "rails_helper"
 RSpec.describe "Trip Items API" do
   let!(:user_1) { create(:user) }
   let!(:user_2) { create(:user) }
-  let!(:trip) { create(:trip) }
+  let!(:area) { create(:area) }
+  let!(:trip) { create(:trip, area_id: area.id) }
 
   let!(:user_1_items) { create_list :item, 5, {user_id: user_1.id} }
   let!(:user_2_items) { create_list :item, 5, {user_id: user_2.id} }
