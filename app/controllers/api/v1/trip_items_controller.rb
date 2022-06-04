@@ -3,9 +3,9 @@ class Api::V1::TripItemsController < ApplicationController
     render json: TripItemSerializer.new(TripItem.where("trip_id = ?", params[:trip_id]))
   end
 
-  # def create
-  #   render json: ItemSerializer.new(Item.create!(item_params)), status: :created
-  # end
+  def create
+    render json: TripItemSerializer.new(TripItem.create!(trip_item_params)), status: :created
+  end
   #
   # def update
   #   item = Item.find(params[:item_id])
@@ -22,9 +22,10 @@ class Api::V1::TripItemsController < ApplicationController
   #   render status: 204
   # end
   #
-  # private
-  #
-  # def item_params
-  #   params.require(:item).permit(:name, :description, :count, :category, :user_id)
-  # end
+
+  private
+
+  def trip_item_params
+    params.require(:trip_item).permit(:trip_id, :item_id)
+  end
 end

@@ -20,4 +20,5 @@ Rails.application.routes.draw do
 
   # Trip Items Endpoints
   get "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#index"
+  post "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#create"
 end
