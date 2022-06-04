@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+
   # Users Endpoints
   get "/api/v1/users", to: "api/v1/users#index"
   get "/api/v1/users/:id", to: "api/v1/users#show"
@@ -17,6 +18,9 @@ Rails.application.routes.draw do
   get "/api/v1/users/:user_id/trips", to: "api/v1/trips#index"
   get "/api/v1/trips/:id", to: "api/v1/trips#show"
   post "/api/v1/users/:user_id/trips", to: "api/v1/trips#create"
+
+  # Trip Users Endpoints
+  get '/api/v1/trips/:id/users', to: 'api/v1/trips/users#index'
 
   # Trip Items Endpoints
   get "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#index"
