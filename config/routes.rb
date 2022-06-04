@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   # Trip Users Endpoints
   get '/api/v1/trips/:id/users', to: 'api/v1/trips/users#index'
   post '/api/v1/trips/:id/users', to: 'api/v1/trips/users#create'
+  patch '/api/v1/trips/:id/users', to: 'api/v1/trips/users#update'
 
   # Trip Items Endpoints
   get "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#index"

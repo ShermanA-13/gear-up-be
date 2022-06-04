@@ -8,6 +8,16 @@ class Api::V1::Trips::UsersController < ApplicationController
     params[:users].each do |user|
       TripUser.create(trip_id: params[:id], user_id: user, host: false)
     end
-    render status: :created 
+    render status: :created
+  end
+
+  def update
+    params[:users].each do |user|
+      if !TripUser.exists?(user_id: user)
+        # require "pry"; binding.pry
+        TripUser.create(trip_id: params[:id], user_id: user, host: false)
+      end
+    end
+    render status: :created
   end
 end
