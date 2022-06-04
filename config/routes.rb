@@ -20,9 +20,9 @@ Rails.application.routes.draw do
   post "/api/v1/users/:user_id/trips", to: "api/v1/trips#create"
 
   # Trip Users Endpoints
-  get '/api/v1/trips/:id/users', to: 'api/v1/trips/users#index'
-  post '/api/v1/trips/:id/users', to: 'api/v1/trips/users#create'
-  patch '/api/v1/trips/:id/users', to: 'api/v1/trips/users#update'
+  get '/api/v1/trips/:id/users', to: 'api/v1/trip_users#index'
+  post '/api/v1/trips/:id/users', to: 'api/v1/trip_users#create'
+  patch '/api/v1/trips/:id/users', to: 'api/v1/trip_users#update'
 
   # Trip Items Endpoints
   get "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#index"

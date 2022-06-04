@@ -1,4 +1,4 @@
-class Api::V1::Trips::UsersController < ApplicationController
+class Api::V1::TripUsersController < ApplicationController
   def index
     users = User.users_on_trip(params[:id])
     render json: UserSerializer.new(users)
