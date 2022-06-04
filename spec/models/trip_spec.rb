@@ -32,4 +32,20 @@ RSpec.describe Trip, type: :model do
       expect(Trip.user_trips(user.id)).to eq([trip_list[0], trip_list[1], trip_list[3], trip_list[4]])
     end
   end
+
+  describe 'instance methods' do
+    it '#users_to_remove' do
+      trip = create(:trip)
+      users = create_list(:user, 4)
+
+      trip_user1 = TripUser.create!(trip: trip, user: users[0], host: false)
+      trip_user2 = TripUser.create!(trip: trip, user: users[1], host: false)
+      trip_user3 = TripUser.create!(trip: trip, user: users[2], host: false)
+      trip_user4 = TripUser.create!(trip: trip, user: users[3], host: false)
+
+      expect(TripUser.all.count).to eq(4)
+
+      expect(trip.users_to_remove([users[0].id, users[3].id])).to eq([trip_user2, trip_user3])
+    end
+  end
 end
