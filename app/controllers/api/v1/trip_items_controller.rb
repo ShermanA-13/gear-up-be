@@ -6,22 +6,12 @@ class Api::V1::TripItemsController < ApplicationController
   def create
     render json: TripItemSerializer.new(TripItem.create!(trip_item_params)), status: :created
   end
-  #
-  # def update
-  #   item = Item.find(params[:item_id])
-  #   if item.update(item_params)
-  #     render json: ItemSerializer.new(item), status: 201
-  #   else
-  #     render status: 404
-  #   end
-  # end
-  #
-  # def destroy
-  #   item = Item.find(params[:item_id])
-  #   item.destroy
-  #   render status: 204
-  # end
-  #
+
+  def destroy
+    trip_item = TripItem.find(params[:trip_item_id])
+    trip_item.destroy
+    render status: 204
+  end
 
   private
 
