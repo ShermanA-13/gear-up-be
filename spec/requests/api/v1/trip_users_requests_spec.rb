@@ -69,4 +69,27 @@ RSpec.describe "TripUsers API" do
       expect(TripUser.last.host).to be true
     end
   end
+
+  describe 'editing trip attendees/deleting trip_users' do
+    it 'can add trip_users after trip created but not re-add users' do
+      users = create_list(:user, 3)
+      trip = create(:trip)
+
+      TripUser.create!(user: users[0], trip: trip, host: false)
+      TripUser.create!(user: users[2], trip: trip, host: false)
+
+      expect(TripUser.all.count).to eq(2)
+
+      invited = [users[0].id, users[1].id, users[2].id]
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      patch "/api/v1/trips/#{trip.id}/users", headers: headers, params: JSON.generate(invited)
+
+      expect(response).to be_successful
+      expect(response.status).to eq(201)
+
+      expect(TripUser.all.count).to eq(3)
+      expect(TripUser.last.user_id).to eq(users[1].id)
+    end
+  end      
 end
