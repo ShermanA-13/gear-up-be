@@ -19,8 +19,7 @@ RSpec.describe "Trip Items API" do
     end
   }
 
-  it "gets all items for single trip" do
-    binding.pry
+  it "gets all trip items for single trip" do
     get "/api/v1/trips/#{trip.id}/items"
     parsed = JSON.parse(response.body, symbolize_names: true)
     trip_items = parsed[:data]
@@ -35,25 +34,29 @@ RSpec.describe "Trip Items API" do
     end
   end
 
-  # it "can create a new item" do
-  #   item_params = {
-  #     name: "Organic Crash Pad",
-  #     description: "Super soft and thicc, heavy though",
-  #     count: 1,
-  #     category: 7,
-  #     user_id: user.id
-  #   }
-  #   headers = {"CONTENT_TYPE" => "application/json"}
-  #
-  #   post "/api/v1/users/#{user.id}/items", headers: headers, params: JSON.generate(item: item_params)
-  #   created_item = Item.last
-  #
-  #   expect(response).to be_successful
-  #   expect(created_item.name).to eq(item_params[:name])
-  #   expect(created_item.description).to eq(item_params[:description])
-  #   expect(created_item.count).to eq(item_params[:count])
-  #   expect(created_item.category).to eq(item_params[:category])
-  # end
+  it "can create a new trip item" do
+    item = Item.create!(
+      name: "Organic Crash Pad",
+      description: "Super soft and thicc, heavy though",
+      count: 1,
+      category: 7,
+      user_id: user_1.id
+    )
+
+    trip_item_params = {
+      trip_id: trip.id,
+      item_id: item.id
+    }
+
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    post "/api/v1/trips/#{trip.id}/items", headers: headers, params: JSON.generate(trip_item: trip_item_params)
+    created_trip_item = TripItem.last
+
+    expect(response).to be_successful
+    expect(created_trip_item.trip_id).to eq(trip_item_params[:trip_id])
+    expect(created_trip_item.item_id).to eq(trip_item_params[:item_id])
+  end
   #
   # it "can update an item" do
   #   id = create(:item, {user_id: user.id}).id
