@@ -26,4 +26,25 @@ RSpec.describe "TripUsers API" do
       end
     end
   end
+
+  describe 'creating trip_users' do
+    it 'can make trip users' do
+      users = create_list(:user, 5)
+      trip = create(:trip)
+
+      invited = [users[0].id, users[2].id, users[3].id]
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/trips/:id/users", headers: headers, params: JSON.generate(users: invited)
+
+      expect(response).to be_successful
+      expect(response.status).to eq(201)
+
+      expect(TripUser.all.count).to eq(3)
+      TripUser.all.each do |user|
+        expect(user.host).to be false
+        expect(invited.include?(user.id)).to be true
+      end
+    end
+  end
 end
