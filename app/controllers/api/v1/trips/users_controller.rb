@@ -12,12 +12,13 @@ class Api::V1::Trips::UsersController < ApplicationController
   end
 
   def update
+    trip = Trip.find(params[:id])
     params[:users].each do |user|
       if !TripUser.exists?(user_id: user)
-        # require "pry"; binding.pry
-        TripUser.create(trip_id: params[:id], user_id: user, host: false)
+        TripUser.create(trip_id: trip.id, user_id: user, host: false)
       end
     end
-    render status: :created
+    trip.users_to_remove(params[:users]).each {|user| user.destroy}
+    render status: 200
   end
 end
