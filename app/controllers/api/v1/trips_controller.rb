@@ -22,6 +22,8 @@ class Api::V1::TripsController < ApplicationController
     render json: TripSerializer.new(trip) if trip.save
   end
 
+  
+
   private
     def trip_params
       params.require(:trip).permit(:name, :location, :description, :start_date, :end_date)

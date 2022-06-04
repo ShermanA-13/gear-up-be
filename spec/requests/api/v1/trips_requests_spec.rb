@@ -129,4 +129,18 @@ RSpec.describe 'Trips API' do
       expect(found_update.description).to eq("More Excitement!")
     end
   end
+
+  describe "destroy trip" do
+    it 'can delete a single trip' do
+      trips = create_list(:trip, 4)
+      expect(Trip.all.count).to eq(4)
+
+      delete "/api/v1/trips/#{trips[1].id}"
+
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+      expect(Trip.exists?(trips[1].id)).to be false
+      expect(Trip.all.count).to eq(3)
+    end
+  end
 end
