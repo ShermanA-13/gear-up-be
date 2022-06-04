@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+
   def index
     users = User.all
     render json: UserSerializer.new(users)
@@ -20,6 +21,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
+
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email)
     end

@@ -49,29 +49,29 @@ RSpec.describe "Items API" do
     expect(created_item.count).to eq(item_params[:count])
     expect(created_item.category).to eq(item_params[:category])
   end
-  #
-  # it "can destroy an item" do
-  #   item = create(:item, {merchant_id: merchant_list[2].id})
-  #   expect(Item.count).to eq(16)
-  #
-  #   delete "/api/v1/items/#{item.id}"
-  #
-  #   expect(response).to be_successful
-  #   expect(Item.count).to eq(15)
-  #   expect { Item.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
-  # end
-  #
-  # it "can update an item" do
-  #   id = create(:item, {merchant_id: merchant_list[2].id}).id
-  #   previous_name = Item.last.name
-  #   item_params = {name: "Small Wool Table"}
-  #   headers = {"CONTENT_TYPE" => "application/json"}
-  #
-  #   patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate({item: item_params})
-  #   item = Item.find_by(id: id)
-  #
-  #   expect(response).to be_successful
-  #   expect(item.name).to_not eq(previous_name)
-  #   expect(item.name).to eq("Small Wool Table")
-  # end
+
+  it "can update an item" do
+    id = create(:item, {user_id: user.id}).id
+    previous_name = Item.last.name
+    item_params = {name: "Super Dope Climbing Thing"}
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    patch "/api/v1/users/#{user.id}/items/#{id}", headers: headers, params: JSON.generate({item: item_params})
+    item = Item.find_by(id: id)
+
+    expect(response).to be_successful
+    expect(item.name).to_not eq(previous_name)
+    expect(item.name).to eq("Super Dope Climbing Thing")
+  end
+
+  it "can destroy an item" do
+    item = create(:item, {user_id: user.id})
+    expect(Item.count).to eq(6)
+
+    delete "/api/v1/users/#{user.id}/items/#{item.id}"
+
+    expect(response).to be_successful
+    expect(Item.count).to eq(5)
+    expect { Item.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
+  end
 end
