@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe "TripUsers API" do
   describe 'getting a trips users' do
     it 'returns all users for a given trip' do
+      area = create(:area)
       users = create_list(:user, 5)
-      trip = create(:trip)
+      trip = create(:trip, area: area)
 
       TripUser.create!(trip: trip, user: users[0], host: false)
       TripUser.create!(trip: trip, user: users[2], host: false)
@@ -29,8 +30,9 @@ RSpec.describe "TripUsers API" do
 
   describe 'creating trip_users' do
     it 'can make trip users that are invited' do
+      area = create(:area)
       users = create_list(:user, 5)
-      trip = create(:trip)
+      trip = create(:trip, area: area)
 
       invited = [users[0].id, users[2].id, users[3].id]
       headers = {"CONTENT_TYPE" => "application/json"}
@@ -49,10 +51,11 @@ RSpec.describe "TripUsers API" do
 
     it 'makes a trip user for the host when trip is created' do
       users = create_list(:user, 3)
+      area = create(:area)
 
       trip_params = {
             name: "Climbing",
-            location: "Yosemite",
+            area_id: area.id,
             description: "YOLO",
             start_date: Date.today,
             end_date: Date.today.next_day
@@ -73,7 +76,8 @@ RSpec.describe "TripUsers API" do
   describe 'editing trip attendees/deleting trip_users' do
     it 'can add trip_users after trip created but not re-add users' do
       users = create_list(:user, 3)
-      trip = create(:trip)
+      area = create(:area)
+      trip = create(:trip, area: area)
 
       TripUser.create!(user: users[0], trip: trip, host: false)
       TripUser.create!(user: users[2], trip: trip, host: false)
@@ -94,7 +98,8 @@ RSpec.describe "TripUsers API" do
 
     it 'can remove a trip_user' do
       users = create_list(:user, 3)
-      trip = create(:trip)
+      area = create(:area)
+      trip = create(:trip, area: area)
 
       users.each {|user| TripUser.create(trip: trip, user: user, host: false)}
 

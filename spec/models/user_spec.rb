@@ -16,8 +16,9 @@ RSpec.describe User, type: :model do
 
   describe "class methods" do
     it '.users_on_trip' do
+      area = create(:area)
       users = create_list(:user, 5)
-      trip = create(:trip)
+      trip = create(:trip, area: area)
       TripUser.create!(trip: trip, user: users[0], host: false)
       TripUser.create!(trip: trip, user: users[2], host: false)
       TripUser.create!(trip: trip, user: users[3], host: false)
