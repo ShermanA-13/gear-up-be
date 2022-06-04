@@ -17,4 +17,8 @@ class Trip < ApplicationRecord
   def self.user_trips(id)
     joins(:trip_users).where(trip_users: {user_id: id})
   end
+
+  def users_to_remove(ids)
+    trip_users.where.not(user_id: ids)
+  end
 end
