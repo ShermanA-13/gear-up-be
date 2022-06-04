@@ -65,7 +65,7 @@ RSpec.describe "TripUsers API" do
       expect(response.status).to eq(201)
 
       expect(TripUser.all.count).to eq(1)
-      expect(TripUser.last.id).to eq(users[1].id)
+      expect(TripUser.last.user_id).to eq(users[1].id)
       expect(TripUser.last.host).to be true
     end
   end
