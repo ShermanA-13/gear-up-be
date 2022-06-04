@@ -57,29 +57,17 @@ RSpec.describe "Trip Items API" do
     expect(created_trip_item.trip_id).to eq(trip_item_params[:trip_id])
     expect(created_trip_item.item_id).to eq(trip_item_params[:item_id])
   end
-  #
-  # it "can update an item" do
-  #   id = create(:item, {user_id: user.id}).id
-  #   previous_name = Item.last.name
-  #   item_params = {name: "Super Dope Climbing Thing"}
-  #   headers = {"CONTENT_TYPE" => "application/json"}
-  #
-  #   patch "/api/v1/users/#{user.id}/items/#{id}", headers: headers, params: JSON.generate({item: item_params})
-  #   item = Item.find_by(id: id)
-  #
-  #   expect(response).to be_successful
-  #   expect(item.name).to_not eq(previous_name)
-  #   expect(item.name).to eq("Super Dope Climbing Thing")
-  # end
-  #
-  # it "can destroy an item" do
-  #   item = create(:item, {user_id: user.id})
-  #   expect(Item.count).to eq(6)
-  #
-  #   delete "/api/v1/users/#{user.id}/items/#{item.id}"
-  #
-  #   expect(response).to be_successful
-  #   expect(Item.count).to eq(5)
-  #   expect { Item.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
-  # end
+
+  it "can destroy a trip item" do
+    item = create(:item, {user_id: user_1.id})
+    trip_item = TripItem.create!(trip_id: trip.id, item_id: item.id)
+    expect(trip.trip_items.count).to eq(11)
+
+    delete "/api/v1/trips/#{trip.id}/items/#{trip_item.id}"
+
+    expect(response).to be_successful
+    expect(TripItem.count).to eq(10)
+    expect(Item.count).to eq(11)
+    expect { TripItem.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
+  end
 end
