@@ -22,7 +22,11 @@ class Api::V1::TripsController < ApplicationController
     render json: TripSerializer.new(trip) if trip.save
   end
 
-  
+  def destroy
+    if Trip.exists?(params[:id])
+      Trip.destroy(params[:id])
+    end
+  end
 
   private
     def trip_params
