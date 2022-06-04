@@ -91,5 +91,24 @@ RSpec.describe "TripUsers API" do
       expect(TripUser.all.count).to eq(3)
       expect(TripUser.last.user_id).to eq(users[1].id)
     end
+
+    it 'can remove a trip_user' do
+      users = create_list(:user, 3)
+      trip = create(:trip)
+
+      users.each {|user| TripUser.create(trip: trip, user: user, host: false)}
+
+      expect(TripUser.all.count).to eq(3)
+
+      invited = [users[0].id, users[2].id]
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      patch "/api/v1/trips/#{trip.id}/users", headers: headers, params: JSON.generate(users: invited)
+
+      expect(response).to be_successful
+
+      expect(TripUser.all.count).to eq(2)
+      expect(TripUser.exists?(user_id: users[1].id)).to be false
+    end
   end
 end
