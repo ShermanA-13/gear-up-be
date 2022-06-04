@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :email
+
+  def self.users_on_trip(id)
+    joins(:trip_users).where(trip_users: {trip_id: id})
+  end
 end

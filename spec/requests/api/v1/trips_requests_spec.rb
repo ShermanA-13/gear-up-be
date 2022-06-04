@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Trips API' do
   describe 'get all trips' do
-    it 'returns all trips' do
+    it 'returns all trips for a user' do
       user = create(:user)
       trip_list = create_list(:trip, 5)
       user_trip1 = TripUser.create!(trip: trip_list[0], user: user, host: false)
