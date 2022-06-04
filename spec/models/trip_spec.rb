@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Trip, type: :model do
   describe 'relationships' do
+    it { should belong_to :area }
     it { should have_many :trip_items }
     it { should have_many :trip_users }
     it { should have_many(:users).through(:trip_users) }
@@ -10,7 +11,6 @@ RSpec.describe Trip, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of :name }
-    it { should validate_presence_of :location }
     it { should validate_presence_of :start_date }
     it { should validate_presence_of :end_date }
     it { should validate_presence_of :description }
@@ -23,7 +23,8 @@ RSpec.describe Trip, type: :model do
   describe 'class methods' do
     it '.users_trips' do
       user = create(:user)
-      trip_list = create_list(:trip, 5)
+      area = create(:area)
+      trip_list = create_list(:trip, 5, area: area)
       user_trip1 = TripUser.create!(trip: trip_list[0], user: user, host: false)
       user_trip2 = TripUser.create!(trip: trip_list[1], user: user, host: false)
       user_trip3 = TripUser.create!(trip: trip_list[3], user: user, host: false)
@@ -35,7 +36,8 @@ RSpec.describe Trip, type: :model do
 
   describe 'instance methods' do
     it '#users_to_remove' do
-      trip = create(:trip)
+      area = create(:area)
+      trip = create(:trip, area: area)
       users = create_list(:user, 4)
 
       trip_user1 = TripUser.create!(trip: trip, user: users[0], host: false)
