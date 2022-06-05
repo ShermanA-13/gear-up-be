@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'weather service' do
   it '.get_data returns info from lat and long arguments' do
     response = WeatherService.get_data(35,139)
-binding.pry
+
     expect(response).to be_a Hash
     expect(response).to have_key(:list)
     expect(response[:list][0]).to have_key(:main)
