@@ -2,7 +2,7 @@ class Api::V1::WeathersController < ApplicationController
   # before_action :location
 
   def index
-    weather = WeatherFacade.get_weather(location.lat, location.long)
+    weather = WeathersFacade.get_weather(location.lat, location.long)
     render json: WeatherSerializer.new(weather)
   end
 
