@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   enum category:{
     "Tents" => 0,
     "Sleeping Bag" =>  1,
-    "Stives, Grills & Fuel" => 2,
+    "Stoves, Grills & Fuel" => 2,
     "Cookware" => 3,
     "Dishes" => 4,
     "Ropes" => 5,
