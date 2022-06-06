@@ -13,7 +13,7 @@ RSpec.describe Item, type: :model do
     it { should define_enum_for(:category).with_values([
       "Tents",
       "Sleeping Bag",
-      "Stives, Grills & Fuel",
+      "Stoves, Grills & Fuel",
       "Cookware",
       "Dishes",
       "Ropes",
