@@ -32,7 +32,6 @@ class Api::V1::TripsController < ApplicationController
   def info
     if Trip.exists?(params[:id])
       trip = Trip.find(params[:id])
-      require "pry"; binding.pry
       render json: TripInfoSerializer.trip_info(trip)
     end
   end
