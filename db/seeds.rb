@@ -29,7 +29,12 @@ item_2 = Item.create!( user_id: user_1.id, name: "Trail Mix", category: "Snacks"
 item_3 = Item.create!( user_id: user_2.id, name: "Good Socks", category: "Clothes", count: 3)
 item_4 = Item.create!( user_id: user_2.id, name: "Fancy Tent", category: "Tents", count: 1)
 
-area = Area.create!( name: "Yosemite")
+area = Area.create!(
+  name: "2. Fairfield Central",
+  state: "Wyoming",
+  url: "https://www.mountainproject.com/area/105827602/fairfield-central",
+  long: "-108.84939",
+  lat: "42.73982")
 
 trip_1 = Trip.create!(
   name: "first trip",
