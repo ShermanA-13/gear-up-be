@@ -147,4 +147,26 @@ RSpec.describe 'Trips API' do
       expect(Trip.all.count).to eq(3)
     end
   end
+
+  describe 'full trip info' do
+    it 'can get all trip info with users and items' do
+      users = create_list(:user, 4)
+      user_1_items = create_list(:item, 2, user: users[0])
+      user_2_items = create_list(:item, 2, user: users[1])
+      area = create(:area)
+      trip = create(:trip, area: area)
+      user_trip1 = TripUser.create!(trip: trip, user: users[0], host: false)
+      user_trip2 = TripUser.create!(trip: trip, user: users[1], host: false)
+      user_trip3 = TripUser.create!(trip: trip, user: users[2], host: false)
+      user_trip4 = TripUser.create!(trip: trip, user: users[3], host: false)
+      trip_item1 = TripItem.create!(trip: trip, item: user_1_items[0])
+      trip_item1 = TripItem.create!(trip: trip, item: user_1_items[1])
+      trip_item1 = TripItem.create!(trip: trip, item: user_2_items[0])
+      trip_item1 = TripItem.create!(trip: trip, item: user_2_items[1])
+
+      get "/api/v1/trips/#{trip.id}/info"
+
+      expect(response).to be_successful
+    end
+  end
 end
