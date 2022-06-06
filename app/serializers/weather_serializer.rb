@@ -1,6 +1,7 @@
 class WeatherSerializer
   include JSONAPI::Serializer
-  attributes :temp,
+  attributes :id,
+             :temp,
              :feels_like,
              :temp_min,
              :temp_max,
