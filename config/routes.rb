@@ -31,4 +31,7 @@ Rails.application.routes.draw do
   get "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#index"
   post "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#create"
   delete "/api/v1/trips/:trip_id/items/:trip_item_id", to: "api/v1/trip_items#destroy"
+
+  #Weather Endpoint
+  get "/api/v1/trips/:trip_id/weather", to: "api/v1/weathers#index"
 end

@@ -17,7 +17,7 @@ RSpec.describe "Items API" do
       expect(item[:attributes][:name]).to be_a(String)
       expect(item[:attributes][:description]).to be_a(String)
       expect(item[:attributes][:count]).to be_an(Integer)
-      expect(item[:attributes][:category]).to be_an(Integer)
+      expect(item[:attributes][:category]).to be_an(String)
     end
   end
 
@@ -35,11 +35,11 @@ RSpec.describe "Items API" do
       name: "Organic Crash Pad",
       description: "Super soft and thicc, heavy though",
       count: 1,
-      category: 7,
+      category: "Crash Pads",
       user_id: user.id
     }
-    headers = {"CONTENT_TYPE" => "application/json"}
 
+    headers = {"CONTENT_TYPE" => "application/json"}
     post "/api/v1/users/#{user.id}/items", headers: headers, params: JSON.generate(item: item_params)
     created_item = Item.last
 
