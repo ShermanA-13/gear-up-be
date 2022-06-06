@@ -6,9 +6,9 @@ class Item < ApplicationRecord
   validates_presence_of :name, :category
   validates_numericality_of :count, greater_than: 0
 
-  enum category:{
+  enum category: {
     "Tents" => 0,
-    "Sleeping Bag" =>  1,
+    "Sleeping Bag" => 1,
     "Stoves, Grills & Fuel" => 2,
     "Cookware" => 3,
     "Dishes" => 4,
