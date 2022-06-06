@@ -31,5 +31,5 @@ Rails.application.routes.draw do
   delete "/api/v1/trips/:trip_id/items/:trip_item_id", to: "api/v1/trip_items#destroy"
 
   #Weather Endpoint
-  get "/api/v1/trips/:trip_id/weather", to: "api/v1/weather#index"
+  get "/api/v1/trips/:trip_id/weather", to: "api/v1/weathers#index"
 end
