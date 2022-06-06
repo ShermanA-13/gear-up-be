@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   patch '/api/v1/trips/:id', to: 'api/v1/trips#update'
   delete '/api/v1/trips/:id', to: 'api/v1/trips#destroy'
 
-  get "/api/v1/trips/:id/info", to: "api/v1/trips#info"
-
   # Trip Users Endpoints
   get '/api/v1/trips/:id/users', to: 'api/v1/trip_users#index'
   post '/api/v1/trips/:id/users', to: 'api/v1/trip_users#create'

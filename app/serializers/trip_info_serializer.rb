@@ -1,6 +1,18 @@
 class TripInfoSerializer
+  def self.find_info(array)
+    weather = array.select {|info| info.date.include?("12:00:00") }
+    if weather.empty?
+      array.sample
+    else
+      weather.first
+    end
+  end
+
+  def self.precipitation_calculation(array)
+    array.map {|info| info.percipitation_probability }.sum / array.count
+  end
+
   def self.trip_info(trip, weather)
-    # require "pry"; binding.pry
     {
       id: trip.id,
       type: "trip info",
@@ -8,6 +20,7 @@ class TripInfoSerializer
       start_date: trip.start_date,
       end_date: trip.end_date,
       host: User.find(trip.host_id).first_name,
+      description: trip.description,
       lat: trip.area.lat,
       long: trip.area.long,
       area: trip.area.name,
@@ -36,17 +49,17 @@ class TripInfoSerializer
                weather: {
                  low_temp: info.sort_by {|w| w.temp}.first.temp,
                  high_temp: info.sort_by {|w| w.temp}.last.temp,
-                 cloud_coverage: info.select {|w| w.date.include?("12:00:00")}.first.cloud_coverage,
-                 feels_like: info.select {|w| w.date.include?("12:00:00")}.first.feels_like,
-                 humidity: info.select {|w| w.date.include?("12:00:00")}.first.humidity,
-                 percipitation_probability: info.select {|w| w.date.include?("12:00:00")}.first.percipitation_probability,
-                 visibility: info.select {|w| w.date.include?("12:00:00")}.first.visibility,
-                 weather: info.select {|w| w.date.include?("12:00:00")}.first.weather,
-                 weather_description: info.select {|w| w.date.include?("12:00:00")}.first.weather_description,
-                 weather_icon: info.select {|w| w.date.include?("12:00:00")}.first.weather_icon,
-                 wind_direction: info.select {|w| w.date.include?("12:00:00")}.first.wind_direction,
-                 wind_gust: info.select {|w| w.date.include?("12:00:00")}.first.wind_gust,
-                 wind_speed: info.select {|w| w.date.include?("12:00:00")}.first.wind_speed
+                 cloud_coverage: find_info(info).cloud_coverage,
+                 feels_like: find_info(info).feels_like,
+                 humidity: find_info(info).humidity,
+                 percipitation_probability: precipitation_calculation(info),
+                 visibility: find_info(info).visibility,
+                 weather: find_info(info).weather,
+                 weather_description: find_info(info).weather_description,
+                 weather_icon: find_info(info).weather_icon,
+                 wind_direction: find_info(info).wind_direction,
+                 wind_gust: find_info(info).wind_gust,
+                 wind_speed: find_info(info).wind_speed
                }
              }
            end,

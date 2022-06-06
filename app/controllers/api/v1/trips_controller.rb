@@ -5,8 +5,11 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def show
-    trip = Trip.find(params[:id])
-    render json: TripSerializer.new(trip)
+    if Trip.exists?(params[:id])
+      trip = Trip.find(params[:id])
+      weather = WeathersFacade.get_weather(trip.area.lat, trip.area.long)
+      render json: TripInfoSerializer.trip_info(trip, weather)
+    end
   end
 
   def create
@@ -26,15 +29,6 @@ class Api::V1::TripsController < ApplicationController
   def destroy
     if Trip.exists?(params[:id])
       Trip.destroy(params[:id])
-    end
-  end
-
-  def info
-    if Trip.exists?(params[:id])
-      trip = Trip.find(params[:id])
-      weather = WeathersFacade.get_weather(trip.area.lat, trip.area.long)
-      render json: TripInfoSerializer.trip_info(trip, weather)
-      require "pry"; binding.pry
     end
   end
 

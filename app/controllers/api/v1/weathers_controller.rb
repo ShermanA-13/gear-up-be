@@ -1,5 +1,4 @@
 class Api::V1::WeathersController < ApplicationController
-  # before_action :location
 
   def index
     weather = WeathersFacade.get_weather(location.lat, location.long)
