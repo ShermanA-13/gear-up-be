@@ -32,7 +32,9 @@ class Api::V1::TripsController < ApplicationController
   def info
     if Trip.exists?(params[:id])
       trip = Trip.find(params[:id])
-      render json: TripInfoSerializer.trip_info(trip)
+      weather = WeathersFacade.get_weather(trip.area.lat, trip.area.long)
+      render json: TripInfoSerializer.trip_info(trip, weather)
+      require "pry"; binding.pry
     end
   end
 

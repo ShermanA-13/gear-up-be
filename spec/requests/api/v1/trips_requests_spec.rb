@@ -153,7 +153,8 @@ RSpec.describe 'Trips API' do
       users = create_list(:user, 4)
       user_1_items = create_list(:item, 2, user: users[0])
       user_2_items = create_list(:item, 2, user: users[1])
-      area = create(:area)
+      area = create(:area, long: "-108.84939",
+        lat: "42.73982")
       trip = create(:trip, area: area, host_id: users[0].id)
       user_trip1 = TripUser.create!(trip: trip, user: users[0], host: false)
       user_trip2 = TripUser.create!(trip: trip, user: users[1], host: false)

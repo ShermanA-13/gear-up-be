@@ -1,5 +1,6 @@
 class TripInfoSerializer
-  def self.trip_info(trip)
+  def self.trip_info(trip, weather)
+    # require "pry"; binding.pry
     {
       id: trip.id,
       type: "trip info",
@@ -28,7 +29,30 @@ class TripInfoSerializer
               category: item.category,
               owner: item.user.first_name
             }
-          end
+          end,
+      weather: {forecast:
+              weather.group_by {|w| w.date.split[0] }.map do |date, info|
+               { date: date.split[0],
+               weather: {
+                 low_temp: info.sort_by {|w| w.temp}.first.temp,
+                 high_temp: info.sort_by {|w| w.temp}.last.temp,
+                 cloud_coverage: info.select {|w| w.date.include?("12:00:00")}.first.cloud_coverage,
+                 feels_like: info.select {|w| w.date.include?("12:00:00")}.first.feels_like,
+                 humidity: info.select {|w| w.date.include?("12:00:00")}.first.humidity,
+                 percipitation_probability: info.select {|w| w.date.include?("12:00:00")}.first.percipitation_probability,
+                 visibility: info.select {|w| w.date.include?("12:00:00")}.first.visibility,
+                 weather: info.select {|w| w.date.include?("12:00:00")}.first.weather,
+                 weather_description: info.select {|w| w.date.include?("12:00:00")}.first.weather_description,
+                 weather_icon: info.select {|w| w.date.include?("12:00:00")}.first.weather_icon,
+                 wind_direction: info.select {|w| w.date.include?("12:00:00")}.first.wind_direction,
+                 wind_gust: info.select {|w| w.date.include?("12:00:00")}.first.wind_gust,
+                 wind_speed: info.select {|w| w.date.include?("12:00:00")}.first.wind_speed
+               }
+             }
+           end,
+           today_sunrise: weather.first.sunrise,
+           today_sunset: weather.first.sunset
+        }
       }
   end
 end
