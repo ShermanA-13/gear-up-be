@@ -1,5 +1,6 @@
 class Weather
-  attr_reader :temp,
+  attr_reader :id,
+              :temp,
               :feels_like,
               :temp_min,
               :temp_max,
@@ -17,6 +18,7 @@ class Weather
               :sunset
 
   def initialize(data, sunrise, sunset)
+    @id = nil
     @temp = data[:main][:temp]
     @feels_like = data[:main][:feels_like]
     @temp_min = data[:main][:temp_min]
