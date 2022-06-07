@@ -18,6 +18,15 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def find_item(id)
+    if Item.exists?(id)
+      @item = Item.find(id)
+    else
+      @item = Error.new(404, "NOT FOUND", "No item with id #{id}")
+      render json: ErrorSerializer.new(@item).serialized_json, status: 404
+    end
+  end
+
   def database_error(object)
     error = Error.new(400, "INPUT ERROR", object.errors.full_messages.to_sentence)
     render json: ErrorSerializer.new(error).serialized_json, status: 400

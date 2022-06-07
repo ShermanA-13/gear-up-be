@@ -26,11 +26,11 @@ RSpec.describe "Items API" do
 
     get "/api/v1/users/#{wrong_id}/items"
 
-    trips_response = JSON.parse(response.body, symbolize_names: true)
+    items_response = JSON.parse(response.body, symbolize_names: true)
     expect(response.status).to eq(404)
-    expect(trips_response[:errors].first[:status]).to eq("NOT FOUND")
-    expect(trips_response[:errors].first[:message]).to eq("No user with id #{wrong_id}")
-    expect(trips_response[:errors].first[:code]).to eq(404)
+    expect(items_response[:errors].first[:status]).to eq("NOT FOUND")
+    expect(items_response[:errors].first[:message]).to eq("No user with id #{wrong_id}")
+    expect(items_response[:errors].first[:code]).to eq(404)
   end
 
   it "gets one item for user" do
@@ -40,6 +40,18 @@ RSpec.describe "Items API" do
     expect(response).to be_successful
     expect(item[:id]).to eq(items_list.first.id.to_s)
     expect(item[:id]).to_not eq(items_list.last.id.to_s)
+  end
+
+  it 'returns an error if the item does not exist' do
+    wrong_item_id = items_list.last.id + 1
+
+    get "/api/v1/users/#{user.id}/items/#{wrong_item_id}"
+
+    item_response = JSON.parse(response.body, symbolize_names: true)
+    expect(response.status).to eq(404)
+    expect(item_response[:errors].first[:status]).to eq("NOT FOUND")
+    expect(item_response[:errors].first[:message]).to eq("No item with id #{wrong_item_id}")
+    expect(item_response[:errors].first[:code]).to eq(404)
   end
 
   it "can create a new item" do

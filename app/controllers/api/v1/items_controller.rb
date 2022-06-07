@@ -7,7 +7,9 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    render json: ItemSerializer.new(Item.find(params[:item_id]))
+    if find_item(params[:item_id]).class == Item
+      render json: ItemSerializer.new(@item)
+    end
   end
 
   def create
