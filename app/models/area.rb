@@ -1,5 +1,5 @@
 class Area < ApplicationRecord
-  has_many :trips
+  has_many :trips, dependent: :destroy
   validates_presence_of :name, :state, :url, :lat, :long
 
   def self.find_all_by_name(name)
