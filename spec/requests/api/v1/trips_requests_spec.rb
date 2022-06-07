@@ -33,6 +33,26 @@ RSpec.describe 'Trips API' do
         expect(trip[:attributes][:start_date]).to be_a String
       end
     end
+
+    it 'returns an error if the user does not exist' do
+      user = create(:user)
+      area = create(:area)
+      trip_list = create_list(:trip, 5, area: area, host_id: user.id)
+      user_trip1 = TripUser.create!(trip: trip_list[0], user: user, host: false)
+      user_trip2 = TripUser.create!(trip: trip_list[1], user: user, host: false)
+      user_trip3 = TripUser.create!(trip: trip_list[3], user: user, host: false)
+      user_trip4 = TripUser.create!(trip: trip_list[4], user: user, host: false)
+
+      wrong_id = user.id + 1
+
+      get "/api/v1/users/#{wrong_id}/trips"
+
+      trips_response = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(404)
+      expect(trips_response[:errors].first[:status]).to eq("NOT FOUND")
+      expect(trips_response[:errors].first[:message]).to eq("No user with id #{wrong_id}")
+      expect(trips_response[:errors].first[:code]).to eq(404)
+    end
   end
 
   describe 'get one trip' do

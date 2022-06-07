@@ -1,7 +1,12 @@
 class Api::V1::TripsController < ApplicationController
   def index
-    trips = Trip.user_trips(params[:user_id])
-    render json: TripSerializer.new(trips)
+    if User.exists?(params[:user_id])
+      trips = Trip.user_trips(params[:user_id])
+      render json: TripSerializer.new(trips)
+    else
+      error = Error.new(404, "NOT FOUND", "No user with id #{params[:user_id]}")
+      render json: ErrorSerializer.new(error).serialized_json, status: 404
+    end
   end
 
   def show
