@@ -1,7 +1,9 @@
 class Api::V1::ItemsController < ApplicationController
 
   def index
-    render json: ItemSerializer.new(Item.where("user_id = ?", params[:user_id]))
+    if find_user(params[:user_id]).class == User
+      render json: ItemSerializer.new(@user.items)
+    end
   end
 
   def show

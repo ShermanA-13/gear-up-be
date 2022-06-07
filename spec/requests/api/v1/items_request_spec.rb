@@ -21,6 +21,18 @@ RSpec.describe "Items API" do
     end
   end
 
+  it 'returns an error if the user does not exist' do
+    wrong_id = user.id + 1
+
+    get "/api/v1/users/#{wrong_id}/items"
+
+    trips_response = JSON.parse(response.body, symbolize_names: true)
+    expect(response.status).to eq(404)
+    expect(trips_response[:errors].first[:status]).to eq("NOT FOUND")
+    expect(trips_response[:errors].first[:message]).to eq("No user with id #{wrong_id}")
+    expect(trips_response[:errors].first[:code]).to eq(404)
+  end
+
   it "gets one item for user" do
     get "/api/v1/users/#{user.id}/items/#{items_list.first.id}"
     parsed = JSON.parse(response.body, symbolize_names: true)
