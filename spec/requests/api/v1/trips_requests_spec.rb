@@ -183,8 +183,6 @@ RSpec.describe 'Trips API' do
       expect(trip_response[:errors].first[:message]).to eq("Name can't be blank, Start date can't be blank, and Start date is not included in the list")
       expect(trip_response[:errors].first[:code]).to eq(400)
     end
-
-
   end
 
   describe 'patch trips' do
@@ -224,6 +222,34 @@ RSpec.describe 'Trips API' do
       expect(found_update.host_id).to eq(trip.host_id)
       expect(found_update.description).not_to eq(trip.description)
       expect(found_update.description).to eq("More Excitement!")
+    end
+
+    it 'returns an error if the trip does not exist' do
+      area = create(:area)
+      trip = Trip.create(name: "Fun Days!",
+                        area_id: area.id,
+                        start_date: Date.today,
+                        end_date: Date.today.next_day,
+                        description: "Whoop Whoop!",
+                        host_id: 4)
+
+      new_trip_edits = {
+                name: "Funner Days",
+                description: "More Excitement!"
+              }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      wrong_id = trip.id + 1
+
+      patch "/api/v1/trips/#{wrong_id}", headers: headers, params: JSON.generate(trip: new_trip_edits)
+
+      trip_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(404)
+      expect(response.status).to eq(404)
+      expect(trip_response[:errors].first[:status]).to eq("NOT FOUND")
+      expect(trip_response[:errors].first[:message]).to eq("No trip with id #{wrong_id}")
+      expect(trip_response[:errors].first[:code]).to eq(404)
     end
   end
 

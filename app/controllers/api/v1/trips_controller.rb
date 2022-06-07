@@ -25,8 +25,10 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def update
-    trip = Trip.update(params[:id], trip_params)
-    render json: TripSerializer.new(trip) if trip.save
+    if find_trip(params[:id]).class == Trip
+      @trip = Trip.update(params[:id], trip_params)
+      render json: TripSerializer.new(@trip) if @trip.save
+    end
   end
 
   def destroy
