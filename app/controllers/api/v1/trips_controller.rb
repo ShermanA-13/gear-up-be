@@ -3,8 +3,6 @@ class Api::V1::TripsController < ApplicationController
     if find_user(params[:user_id]).class == User
       trips = Trip.user_trips(@user)
       render json: TripSerializer.new(trips)
-    else
-      render json: ErrorSerializer.new(@user).serialized_json, status: 404
     end
   end
 
