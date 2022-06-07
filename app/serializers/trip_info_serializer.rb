@@ -43,7 +43,10 @@ class TripInfoSerializer
               owner: item.user.first_name
             }
           end,
-      weather: {forecast:
+      weather: if weather.class == String
+                  weather
+              else
+            {forecast:
               weather.group_by {|w| w.date.split[0] }.map do |date, info|
                { date: date.split[0],
                weather: {
@@ -66,6 +69,7 @@ class TripInfoSerializer
            today_sunrise: weather.first.sunrise,
            today_sunset: weather.first.sunset
         }
+        end
       }
   end
 end

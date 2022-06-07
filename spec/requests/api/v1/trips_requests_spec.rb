@@ -38,15 +38,17 @@ RSpec.describe 'Trips API' do
   describe 'get one trip' do
     it 'can retrieve one trips information' do
       users = create_list(:user, 4)
+      area = create(:area, long: "-108.84939", lat: "42.73982")
+      trip = create(:trip, area: area, host_id: users[0].id)
+
       user_1_items = create_list(:item, 2, user: users[0])
       user_2_items = create_list(:item, 2, user: users[1])
-      area = create(:area, long: "-108.84939",
-        lat: "42.73982")
-      trip = create(:trip, area: area, host_id: users[0].id)
+
       user_trip1 = TripUser.create!(trip: trip, user: users[0], host: false)
       user_trip2 = TripUser.create!(trip: trip, user: users[1], host: false)
       user_trip3 = TripUser.create!(trip: trip, user: users[2], host: false)
       user_trip4 = TripUser.create!(trip: trip, user: users[3], host: false)
+
       trip_item1 = TripItem.create!(trip: trip, item: user_1_items[0])
       trip_item1 = TripItem.create!(trip: trip, item: user_1_items[1])
       trip_item1 = TripItem.create!(trip: trip, item: user_2_items[0])
@@ -143,8 +145,6 @@ RSpec.describe 'Trips API' do
 
       expect(updated_trip[:attributes][:name]).not_to eq(trip.name)
       expect(updated_trip[:attributes][:name]).to eq("Funner Days")
-      # expect(updated_trip[:attributes][:start_date]).to eq(trip.start_date)
-      # expect(updated_trip[:attributes][:end_date]).to eq(trip.end_date)
       expect(updated_trip[:attributes][:host_id]).to eq(trip.host_id)
       expect(updated_trip[:attributes][:description]).not_to eq(trip.description)
       expect(updated_trip[:attributes][:description]).to eq("More Excitement!")
