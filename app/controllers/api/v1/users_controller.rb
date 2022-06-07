@@ -6,12 +6,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    if User.exists?(params[:id])
-      user = User.find(params[:id])
-      render json: UserSerializer.new(user)
+    if find_user(params[:id]).class == User
+      render json: UserSerializer.new(@user)
     else
-      error = Error.new(404, "NOT FOUND", "No user with id #{params[:id]}")
-      render json: ErrorSerializer.new(error).serialized_json, status: 404
+      # error = Error.new(404, "NOT FOUND", "No user with id #{params[:id]}")
+      render json: ErrorSerializer.new(@error).serialized_json, status: 404
     end
   end
 
