@@ -10,7 +10,7 @@ class Trip < ApplicationRecord
   validates_inclusion_of :start_date, in: Date.today..Date.today.next_year
 
   def end_date_later_than_start
-    if end_date.present? && end_date < start_date
+    if end_date.present? && start_date.present? && end_date < start_date
       errors.add(:end_date, "End date can not be before start date.")
     end
   end

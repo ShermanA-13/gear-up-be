@@ -17,4 +17,9 @@ class ApplicationController < ActionController::API
       render json: ErrorSerializer.new(@trip).serialized_json, status: 404
     end
   end
+
+  def creation_error(object)
+    error = Error.new(400, "MISSING INFO", object.errors.full_messages.to_sentence)
+    render json: ErrorSerializer.new(error).serialized_json, status: 400
+  end
 end

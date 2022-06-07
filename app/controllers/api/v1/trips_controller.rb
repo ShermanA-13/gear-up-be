@@ -19,6 +19,8 @@ class Api::V1::TripsController < ApplicationController
     if trip.save
       TripUser.create(user_id: params[:user_id], trip_id: trip.id, host: true)
       render json: TripSerializer.new(trip), status: :created
+    else
+      creation_error(trip)
     end
   end
 

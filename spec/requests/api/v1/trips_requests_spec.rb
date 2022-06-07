@@ -164,6 +164,27 @@ RSpec.describe 'Trips API' do
       expect(new_trip.start_date).to eq(trip_params[:start_date])
       expect(new_trip.end_date).to eq(trip_params[:end_date])
     end
+
+    it 'wont create a trip with missing attributes' do
+      user = create(:user)
+      area = create(:area)
+      trip_params = {
+        area_id: area.id,
+        description: "YOLO",
+        end_date: Date.today.next_day
+      }
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post "/api/v1/users/#{user.id}/trips", headers: headers, params: JSON.generate(trip: trip_params)
+
+      trip_response = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(400)
+      expect(trip_response[:errors].first[:status]).to eq("MISSING INFO")
+      expect(trip_response[:errors].first[:message]).to eq("Name can't be blank, Start date can't be blank, and Start date is not included in the list")
+      expect(trip_response[:errors].first[:code]).to eq(400)
+    end
+
+
   end
 
   describe 'patch trips' do

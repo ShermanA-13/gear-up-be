@@ -20,8 +20,7 @@ class Api::V1::UsersController < ApplicationController
       if user.save
         render json: UserSerializer.new(user), status: :created
       else
-        error = Error.new(400, "MISSING INFO", user.errors.full_messages.to_sentence)
-        render json: ErrorSerializer.new(error).serialized_json, status: 400
+        creation_error(user)
       end
     end
   end
