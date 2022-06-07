@@ -35,4 +35,5 @@ Rails.application.routes.draw do
 
   # Areas Search Endpoint
   get "/api/v1/areas/find_all", to: "api/v1/areas#find_all"
+  get "/api/v1/areas/:id", to: "api/v1/areas#show"
 end
