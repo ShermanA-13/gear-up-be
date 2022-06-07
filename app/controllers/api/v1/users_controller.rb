@@ -6,8 +6,13 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    user = User.find(params[:id])
-    render json: UserSerializer.new(user)
+    if User.exists?(params[:id])
+      user = User.find(params[:id])
+      render json: UserSerializer.new(user)
+    else
+      error = Error.new(404, "NOT FOUND", "No user with id #{params[:id]}")
+      render json: ErrorSerializer.new(error).serialized_json, status: 404
+    end
   end
 
   def create
@@ -16,7 +21,12 @@ class Api::V1::UsersController < ApplicationController
       render json: UserSerializer.new(user)
     else
       user = User.new(user_params)
-      render json: UserSerializer.new(user), status: :created if user.save
+      if user.save
+        render json: UserSerializer.new(user), status: :created
+      else
+        error = Error.new(400, "MISSING INFO", user.errors.full_messages.to_sentence)
+        render json: ErrorSerializer.new(error).serialized_json, status: 400
+      end
     end
   end
 

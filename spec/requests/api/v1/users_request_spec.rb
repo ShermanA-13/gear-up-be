@@ -48,7 +48,9 @@ RSpec.describe "Users API" do
 
       user_response = JSON.parse(response.body, symbolize_names: true)
       expect(response.status).to eq(404)
-      expect(response.message).to eq("Not found")
+      expect(user_response[:errors].first[:status]).to eq("NOT FOUND")
+      expect(user_response[:errors].first[:code]).to eq(404)
+      expect(user_response[:errors].first[:message]).to eq("No user with id #{id}")
     end
   end
 
@@ -93,6 +95,23 @@ RSpec.describe "Users API" do
       expect(response).to be_successful
       expect(response.status).to eq(200)
       expect(User.all.count).to eq(3)
+    end
+
+    it 'wont create a user if an attribute is missing' do
+      user_params = {
+        last_name: "Sparrow",
+        email: "tHeRuMiSgOnE@pirates.org"
+      }
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v1/users", headers: headers, params: JSON.generate(user: user_params)
+
+      user_response = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(400)
+      expect(user_response[:errors].first[:status]).to eq("MISSING INFO")
+      expect(user_response[:errors].first[:message]).to eq("First name can't be blank")
+      expect(user_response[:errors].first[:code]).to eq(400)
     end
   end
 end
