@@ -32,8 +32,8 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def destroy
-    if Trip.exists?(params[:id])
-      Trip.destroy(params[:id])
+    if find_trip(params[:id]).class == Trip
+      @trip.destroy
     end
   end
 

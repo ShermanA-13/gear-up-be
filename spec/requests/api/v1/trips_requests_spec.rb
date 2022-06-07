@@ -266,5 +266,22 @@ RSpec.describe 'Trips API' do
       expect(Trip.exists?(trips[1].id)).to be false
       expect(Trip.all.count).to eq(3)
     end
+
+    it 'returns an error if the trip does not exist' do
+      area = create(:area)
+      trips = create_list(:trip, 4, area: area)
+      expect(Trip.all.count).to eq(4)
+
+      wrong_id = trips.last.id + 1
+      delete "/api/v1/trips/#{wrong_id}"
+
+      trip_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(404)
+      expect(trip_response[:errors].first[:status]).to eq("NOT FOUND")
+      expect(trip_response[:errors].first[:message]).to eq("No trip with id #{wrong_id}")
+      expect(trip_response[:errors].first[:code]).to eq(404)
+      expect(Trip.all.count).to eq(4)
+    end
   end
 end
