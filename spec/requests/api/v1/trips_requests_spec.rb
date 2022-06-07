@@ -5,7 +5,7 @@ RSpec.describe 'Trips API' do
     it 'returns all trips for a user' do
       user = create(:user)
       area = create(:area)
-      trip_list = create_list(:trip, 5, area: area)
+      trip_list = create_list(:trip, 5, area: area, host_id: user.id)
       user_trip1 = TripUser.create!(trip: trip_list[0], user: user, host: false)
       user_trip2 = TripUser.create!(trip: trip_list[1], user: user, host: false)
       user_trip3 = TripUser.create!(trip: trip_list[3], user: user, host: false)
@@ -37,28 +37,57 @@ RSpec.describe 'Trips API' do
 
   describe 'get one trip' do
     it 'can retrieve one trips information' do
-      area = create(:area)
-      trip_list = create_list(:trip, 5, area: area)
-      trip = trip_list.first
+      users = create_list(:user, 4)
+      area = create(:area, long: "-108.84939", lat: "42.73982")
+      trip = create(:trip, area: area, host_id: users[0].id)
+
+      user_1_items = create_list(:item, 2, user: users[0])
+      user_2_items = create_list(:item, 2, user: users[1])
+
+      user_trip1 = TripUser.create!(trip: trip, user: users[0], host: false)
+      user_trip2 = TripUser.create!(trip: trip, user: users[1], host: false)
+      user_trip3 = TripUser.create!(trip: trip, user: users[2], host: false)
+      user_trip4 = TripUser.create!(trip: trip, user: users[3], host: false)
+
+      trip_item1 = TripItem.create!(trip: trip, item: user_1_items[0])
+      trip_item1 = TripItem.create!(trip: trip, item: user_1_items[1])
+      trip_item1 = TripItem.create!(trip: trip, item: user_2_items[0])
+      trip_item1 = TripItem.create!(trip: trip, item: user_2_items[1])
 
       get "/api/v1/trips/#{trip.id}"
 
       trips_response = JSON.parse(response.body, symbolize_names: true)
-      trip = trips_response[:data]
 
       expect(response).to be_successful
 
-      expect(trip).to have_key(:id)
-      expect(trip[:id]).to be_a String
-
-      expect(trip[:type]).to eq("trip")
-
-      expect(trip[:attributes][:name]).to be_a String
-      expect(trip[:attributes][:description]).to be_a String
-      expect(trip[:attributes][:area_id]).to be_a Integer
-      expect(trip[:attributes][:host_id]).to be_an Integer
-      expect(trip[:attributes][:end_date]).to be_a String
-      expect(trip[:attributes][:start_date]).to be_a String
+      expect(trips_response).to have_key(:id)
+      expect(trips_response[:id]).to be_a Integer
+      expect(trips_response[:type]).to eq("trip info")
+      expect(trips_response[:name]).to be_a String
+      expect(trips_response[:description]).to be_a String
+      expect(trips_response[:area]).to be_a String
+      expect(trips_response[:host]).to be_an String
+      expect(trips_response[:end_date]).to be_a String
+      expect(trips_response[:start_date]).to be_a String
+      expect(trips_response[:lat]).to be_a String
+      expect(trips_response[:long]).to be_a String
+      expect(trips_response[:state]).to be_a String
+      expect(trips_response[:users]).to be_an Array
+      expect(trips_response[:users].first[:id]).to be_an Integer
+      expect(trips_response[:users].first[:first_name]).to be_a String
+      expect(trips_response[:users].first[:last_name]).to be_a String
+      expect(trips_response[:users].first[:email]).to be_a String
+      expect(trips_response[:items]).to be_an Array
+      expect(trips_response[:items].first[:id]).to be_an Integer
+      expect(trips_response[:items].first[:name]).to be_an String
+      expect(trips_response[:items].first[:description]).to be_an String
+      expect(trips_response[:items].first[:count]).to be_an Integer
+      expect(trips_response[:items].first[:category]).to be_an String
+      expect(trips_response[:items].first[:owner]).to be_an String
+      expect(trips_response[:weather]).to be_a Hash
+      expect(trips_response[:weather][:forecast]).to be_an Array
+      expect(trips_response[:weather][:forecast].first).to be_a Hash
+      expect(trips_response[:weather][:forecast].first[:weather]).to be_a Hash
     end
   end
 
@@ -116,8 +145,6 @@ RSpec.describe 'Trips API' do
 
       expect(updated_trip[:attributes][:name]).not_to eq(trip.name)
       expect(updated_trip[:attributes][:name]).to eq("Funner Days")
-      # expect(updated_trip[:attributes][:start_date]).to eq(trip.start_date)
-      # expect(updated_trip[:attributes][:end_date]).to eq(trip.end_date)
       expect(updated_trip[:attributes][:host_id]).to eq(trip.host_id)
       expect(updated_trip[:attributes][:description]).not_to eq(trip.description)
       expect(updated_trip[:attributes][:description]).to eq("More Excitement!")
