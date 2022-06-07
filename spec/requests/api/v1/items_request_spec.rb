@@ -54,6 +54,18 @@ RSpec.describe "Items API" do
     expect(item_response[:errors].first[:code]).to eq(404)
   end
 
+  it 'returns an error if the items user does not exist' do
+    wrong_user_id = user.id + 1
+
+    get "/api/v1/users/#{wrong_user_id}/items/#{items_list.first.id}"
+
+    items_response = JSON.parse(response.body, symbolize_names: true)
+    expect(response.status).to eq(404)
+    expect(items_response[:errors].first[:status]).to eq("NOT FOUND")
+    expect(items_response[:errors].first[:message]).to eq("No user with id #{wrong_user_id}")
+    expect(items_response[:errors].first[:code]).to eq(404)
+  end
+
   it "can create a new item" do
     item_params = {
       name: "Organic Crash Pad",
@@ -73,6 +85,47 @@ RSpec.describe "Items API" do
     expect(created_item.count).to eq(item_params[:count])
     expect(created_item.category).to eq(item_params[:category])
   end
+
+  it 'wont create an item with missing attributes' do
+    item_params = {
+      description: "Super soft and thicc, heavy though",
+      count: 1,
+      user_id: user.id
+    }
+
+    headers = {"CONTENT_TYPE" => "application/json"}
+    post "/api/v1/users/#{user.id}/items", headers: headers, params: JSON.generate(item: item_params)
+
+    item_response = JSON.parse(response.body, symbolize_names: true)
+    expect(response.status).to eq(400)
+    expect(item_response[:errors].first[:message]).to eq("Name can't be blank and Category can't be blank")
+    expect(item_response[:errors].first[:status]).to eq("INPUT ERROR")
+    expect(item_response[:errors].first[:code]).to eq(400)
+  end
+
+  it 'wont create an item with a nonexistant user' do
+    item_params = {
+      name: "Organic Crash Pad",
+      description: "Super soft and thicc, heavy though",
+      count: 1,
+      category: "Crash Pads",
+      user_id: user.id
+    }
+
+    wrong_user_id = user.id + 1
+
+    headers = {"CONTENT_TYPE" => "application/json"}
+    post "/api/v1/users/#{wrong_user_id}/items", headers: headers, params: JSON.generate(item: item_params)
+
+    item_response = JSON.parse(response.body, symbolize_names: true)
+    expect(response.status).to eq(404)
+    expect(item_response[:errors].first[:status]).to eq("NOT FOUND")
+    expect(item_response[:errors].first[:message]).to eq("No user with id #{wrong_user_id}")
+    expect(item_response[:errors].first[:code]).to eq(404)
+  end
+
+
+
 
   it "can update an item" do
     id = create(:item, {user_id: user.id}).id

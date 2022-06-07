@@ -7,13 +7,20 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    if find_item(params[:item_id]).class == Item
+    if find_user(params[:user_id]).class == User && find_item(params[:item_id]).class == Item
       render json: ItemSerializer.new(@item)
     end
   end
 
   def create
-    render json: ItemSerializer.new(Item.create!(item_params)), status: :created
+    if find_user(params[:user_id]).class == User
+      item = Item.new(item_params)
+      if item.save
+        render json: ItemSerializer.new(item), status: :created
+      else
+        database_error(item)
+      end
+    end
   end
 
   def update
