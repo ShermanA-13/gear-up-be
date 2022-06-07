@@ -1,14 +1,15 @@
 class Api::V1::TripsController < ApplicationController
   def index
-    trips = Trip.user_trips(params[:user_id])
-    render json: TripSerializer.new(trips)
+    if find_user(params[:user_id]).class == User
+      trips = Trip.user_trips(@user)
+      render json: TripSerializer.new(trips)
+    end
   end
 
   def show
-    if Trip.exists?(params[:id])
-      trip = Trip.find(params[:id])
-      weather = WeathersFacade.get_weather(trip.area.lat, trip.area.long)
-      render json: TripInfoSerializer.trip_info(trip, weather)
+    if find_trip(params[:id]).class == Trip
+      weather = WeathersFacade.get_weather(@trip.area.lat, @trip.area.long)
+      render json: TripInfoSerializer.trip_info(@trip, weather)
     end
   end
 
@@ -18,6 +19,8 @@ class Api::V1::TripsController < ApplicationController
     if trip.save
       TripUser.create(user_id: params[:user_id], trip_id: trip.id, host: true)
       render json: TripSerializer.new(trip), status: :created
+    else
+      creation_error(trip)
     end
   end
 

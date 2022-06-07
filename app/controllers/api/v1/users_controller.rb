@@ -6,8 +6,9 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    user = User.find(params[:id])
-    render json: UserSerializer.new(user)
+    if find_user(params[:id]).class == User
+      render json: UserSerializer.new(@user)
+    end
   end
 
   def create
@@ -16,7 +17,11 @@ class Api::V1::UsersController < ApplicationController
       render json: UserSerializer.new(user)
     else
       user = User.new(user_params)
-      render json: UserSerializer.new(user), status: :created if user.save
+      if user.save
+        render json: UserSerializer.new(user), status: :created
+      else
+        creation_error(user)
+      end
     end
   end
 
