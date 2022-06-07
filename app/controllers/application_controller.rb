@@ -18,8 +18,8 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def creation_error(object)
-    error = Error.new(400, "MISSING INFO", object.errors.full_messages.to_sentence)
+  def database_error(object)
+    error = Error.new(400, "INPUT ERROR", object.errors.full_messages.to_sentence)
     render json: ErrorSerializer.new(error).serialized_json, status: 400
   end
 end

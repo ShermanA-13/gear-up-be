@@ -20,14 +20,18 @@ class Api::V1::TripsController < ApplicationController
       TripUser.create(user_id: params[:user_id], trip_id: trip.id, host: true)
       render json: TripSerializer.new(trip), status: :created
     else
-      creation_error(trip)
+      database_error(trip)
     end
   end
 
   def update
     if find_trip(params[:id]).class == Trip
-      @trip = Trip.update(params[:id], trip_params)
-      render json: TripSerializer.new(@trip) if @trip.save
+      @trip.update(trip_params)
+      if @trip.save
+        render json: TripSerializer.new(@trip)
+      else
+        database_error(@trip)
+      end
     end
   end
 

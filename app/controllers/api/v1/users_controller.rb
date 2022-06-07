@@ -16,12 +16,11 @@ class Api::V1::UsersController < ApplicationController
       user = User.find_by(email: params[:user][:email])
       render json: UserSerializer.new(user)
     else
-      require "pry"; binding.pry
       user = User.new(user_params)
       if user.save
         render json: UserSerializer.new(user), status: :created
       else
-        creation_error(user)
+        database_error(user)
       end
     end
   end
