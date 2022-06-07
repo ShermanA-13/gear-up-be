@@ -45,7 +45,7 @@ RSpec.describe "Users API" do
       id = User.last.id + 1
 
       get "/api/v1/users/#{id}"
-
+      
       user_response = JSON.parse(response.body, symbolize_names: true)
       expect(response.status).to eq(404)
       expect(user_response[:errors].first[:status]).to eq("NOT FOUND")

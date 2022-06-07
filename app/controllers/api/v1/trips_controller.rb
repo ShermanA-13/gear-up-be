@@ -7,10 +7,9 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def show
-    if Trip.exists?(params[:id])
-      trip = Trip.find(params[:id])
-      weather = WeathersFacade.get_weather(trip.area.lat, trip.area.long)
-      render json: TripInfoSerializer.trip_info(trip, weather)
+    if find_trip(params[:id]).class == Trip
+      weather = WeathersFacade.get_weather(@trip.area.lat, @trip.area.long)
+      render json: TripInfoSerializer.trip_info(@trip, weather)
     end
   end
 

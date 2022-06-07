@@ -109,6 +109,32 @@ RSpec.describe 'Trips API' do
       expect(trips_response[:weather][:forecast].first).to be_a Hash
       expect(trips_response[:weather][:forecast].first[:weather]).to be_a Hash
     end
+
+    it 'throws an error if the trip does not exist' do
+      users = create_list(:user, 2)
+      area = create(:area, long: "-108.84939", lat: "42.73982")
+      trip = create(:trip, area: area, host_id: users[0].id)
+
+      user_1_items = create_list(:item, 2, user: users[0])
+      user_2_items = create_list(:item, 2, user: users[1])
+
+      user_trip1 = TripUser.create!(trip: trip, user: users[0], host: false)
+      user_trip2 = TripUser.create!(trip: trip, user: users[1], host: false)
+
+      trip_item1 = TripItem.create!(trip: trip, item: user_1_items[0])
+      trip_item1 = TripItem.create!(trip: trip, item: user_2_items[1])
+
+      wrong_id = trip.id + 1
+
+      get "/api/v1/trips/#{wrong_id}"
+
+      trips_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(404)
+      expect(trips_response[:errors].first[:status]).to eq("NOT FOUND")
+      expect(trips_response[:errors].first[:message]).to eq("No trip with id #{wrong_id}")
+      expect(trips_response[:errors].first[:code]).to eq(404)
+    end
   end
 
   describe 'post trip' do
