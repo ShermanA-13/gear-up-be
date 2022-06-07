@@ -39,6 +39,17 @@ RSpec.describe "Users API" do
       expect(user[:attributes][:last_name]).to eq(users_list.first.last_name)
       expect(user[:attributes][:email]).to eq(users_list.first.email)
     end
+
+    it 'throws an error if the user does not exist' do
+      user = create(:user)
+      id = User.last.id + 1
+
+      get "/api/v1/users/#{id}"
+
+      user_response = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(404)
+      expect(response.message).to eq("Not found")
+    end
   end
 
   describe 'it can create a user' do
