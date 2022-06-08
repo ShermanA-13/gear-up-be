@@ -41,7 +41,7 @@ RSpec.describe "Weathers API" do
         expect(weather[:attributes][:wind_direction]).to be_a Integer
         expect(weather[:attributes][:wind_gust]).to be_a(Float).or be_a Integer
         expect(weather[:attributes][:visibility]).to be_a Integer
-        expect(weather[:attributes][:percipitation_probability]).to be_a(Float).or be_a Integer
+        expect(weather[:attributes][:precipitation_probability]).to be_a(Float).or be_a Integer
         expect(weather[:attributes][:sunrise]).to be_a String
         expect(weather[:attributes][:sunset]).to be_a String
       end

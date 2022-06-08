@@ -44,7 +44,7 @@ describe 'weather poro' do
     expect(weather.wind_direction).to eq data[:wind][:deg]
     expect(weather.wind_gust).to eq data[:wind][:gust]
     expect(weather.visibility).to eq data[:visibility]
-    expect(weather.percipitation_probability).to eq data[:pop]
+    expect(weather.precipitation_probability).to eq data[:pop]
     expect(weather.sunrise).to eq Time.zone.at(sunrise).strftime("%D at %T %Z")
     expect(weather.sunset).to eq Time.zone.at(sunset).strftime("%D at %T %Z")
   end
