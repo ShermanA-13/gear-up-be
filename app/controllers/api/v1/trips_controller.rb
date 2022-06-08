@@ -1,15 +1,15 @@
 class Api::V1::TripsController < ApplicationController
   def index
-    if find_user(params[:user_id]).class == User
-      trips = Trip.user_trips(@user)
+    if valid_params?(User, params[:user_id], "user")
+      trips = Trip.user_trips(@object)
       render json: TripSerializer.new(trips)
     end
   end
 
   def show
-    if find_trip(params[:id]).class == Trip
-      weather = WeathersFacade.get_weather(@trip.area.lat, @trip.area.long)
-      render json: TripInfoSerializer.trip_info(@trip, weather)
+    if valid_params?(Trip, params[:id], "trip")
+      weather = WeathersFacade.get_weather(@object.area.lat, @object.area.long)
+      render json: TripInfoSerializer.trip_info(@object, weather)
     end
   end
 
@@ -25,19 +25,19 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def update
-    if find_trip(params[:id]).class == Trip
-      @trip.update(trip_params)
-      if @trip.save
-        render json: TripSerializer.new(@trip)
+    if valid_params?(Trip, params[:id], "trip")
+      @object.update(trip_params)
+      if @object.save
+        render json: TripSerializer.new(@object)
       else
-        database_error(@trip)
+        database_error(@object)
       end
     end
   end
 
   def destroy
-    if find_trip(params[:id]).class == Trip
-      @trip.destroy
+    if valid_params?(Trip, params[:id], "trip")
+      @object.destroy
     end
   end
 

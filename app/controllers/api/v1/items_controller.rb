@@ -1,19 +1,19 @@
 class Api::V1::ItemsController < ApplicationController
 
   def index
-    if find_user(params[:user_id]).class == User
-      render json: ItemSerializer.new(@user.items)
+    if valid_params?(User, params[:user_id], "user")
+      render json: ItemSerializer.new(@object.items)
     end
   end
 
   def show
-    if find_user(params[:user_id]).class == User && find_item(params[:item_id]).class == Item
-      render json: ItemSerializer.new(@item)
+    if valid_params?(User, params[:user_id], "user") && valid_params?(Item, params[:item_id], "item")
+      render json: ItemSerializer.new(@object)
     end
   end
 
   def create
-    if find_user(params[:user_id]).class == User
+    if valid_params?(User, params[:user_id], "user")
       item = Item.new(item_params)
       if item.save
         render json: ItemSerializer.new(item), status: :created
@@ -24,19 +24,19 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def update
-    if find_item(params[:item_id]).class == Item && find_user(params[:user_id]).class == User
-      @item.update(item_params)
-      if @item.save
-        render json: ItemSerializer.new(@item), status: 201
+    if valid_params?(User, params[:user_id], "user") && valid_params?(Item, params[:item_id], "item")
+      @object.update(item_params)
+      if @object.save
+        render json: ItemSerializer.new(@object), status: 201
       else
-        database_error(@item)
+        database_error(@object)
       end
     end
   end
 
   def destroy
-    if find_item(params[:item_id]).class == Item && find_user(params[:user_id]).class == User
-      @item.destroy
+    if valid_params?(User, params[:user_id], "user") && valid_params?(Item, params[:item_id], "item")
+      @object.destroy
       render status: 204
     end
   end

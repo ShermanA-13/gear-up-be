@@ -6,8 +6,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    if find_user(params[:id]).class == User
-      render json: UserSerializer.new(@user)
+    if valid_params?(User, params[:id], "user")
+      render json: UserSerializer.new(@object)
     end
   end
 
