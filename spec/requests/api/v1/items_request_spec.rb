@@ -157,6 +157,37 @@ RSpec.describe "Items API" do
     expect(not_updated_item.name).to eq(previous_name)
   end
 
+  it 'can not update an item that does not exist' do
+    id = create(:item, {user_id: user.id}).id
+    item_params = {name: "Super Dope Climbing Thing"}
+    headers = {"CONTENT_TYPE" => "application/json"}
+    wrong_item_id = id + 1
+
+    patch "/api/v1/users/#{user.id}/items/#{wrong_item_id}", headers: headers, params: JSON.generate({item: item_params})
+
+    item_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response.status).to eq(404)
+    expect(item_response[:errors].first[:status]).to eq("NOT FOUND")
+    expect(item_response[:errors].first[:message]).to eq("No item with id #{wrong_item_id}")
+    expect(item_response[:errors].first[:code]).to eq(404)
+  end
+
+  it 'can not update an item with the wrong user id' do
+    id = create(:item, {user_id: user.id}).id
+    item_params = {name: "Super Dope Climbing Thing"}
+    headers = {"CONTENT_TYPE" => "application/json"}
+    wrong_user_id = user.id + 1
+
+    patch "/api/v1/users/#{wrong_user_id}/items/#{id}", headers: headers, params: JSON.generate({item: item_params})
+
+    item_response = JSON.parse(response.body, symbolize_names: true)
+    expect(response.status).to eq(404)
+    expect(item_response[:errors].first[:status]).to eq("NOT FOUND")
+    expect(item_response[:errors].first[:message]).to eq("No user with id #{wrong_user_id}")
+    expect(item_response[:errors].first[:code]).to eq(404)
+  end
+
   it "can destroy an item" do
     item = create(:item, {user_id: user.id})
     expect(Item.count).to eq(6)
@@ -166,5 +197,33 @@ RSpec.describe "Items API" do
     expect(response).to be_successful
     expect(Item.count).to eq(5)
     expect { Item.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
+  end
+
+  it 'can not delete an item that does not exist' do
+    item = create(:item, {user_id: user.id})
+    expect(Item.count).to eq(6)
+    wrong_item_id = item.id + 1
+
+    delete "/api/v1/users/#{user.id}/items/#{wrong_item_id}"
+
+    item_response = JSON.parse(response.body, symbolize_names: true)
+    expect(response.status).to eq(404)
+    expect(item_response[:errors].first[:status]).to eq("NOT FOUND")
+    expect(item_response[:errors].first[:message]).to eq("No item with id #{wrong_item_id}")
+    expect(item_response[:errors].first[:code]).to eq(404)
+  end
+
+  it 'can not delete an item with a nonexistant user' do
+    item = create(:item, {user_id: user.id})
+    expect(Item.count).to eq(6)
+    wrong_user_id = user.id + 1
+
+    delete "/api/v1/users/#{wrong_user_id}/items/#{item.id}"
+
+    item_response = JSON.parse(response.body, symbolize_names: true)
+    expect(response.status).to eq(404)
+    expect(item_response[:errors].first[:status]).to eq("NOT FOUND")
+    expect(item_response[:errors].first[:message]).to eq("No user with id #{wrong_user_id}")
+    expect(item_response[:errors].first[:code]).to eq(404)
   end
 end

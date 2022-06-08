@@ -24,7 +24,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def update
-    if find_item(params[:item_id]).class == Item
+    if find_item(params[:item_id]).class == Item && find_user(params[:user_id]).class == User
       @item.update(item_params)
       if @item.save
         render json: ItemSerializer.new(@item), status: 201
@@ -35,9 +35,10 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:item_id])
-    item.destroy
-    render status: 204
+    if find_item(params[:item_id]).class == Item && find_user(params[:user_id]).class == User
+      @item.destroy
+      render status: 204
+    end
   end
 
   private
