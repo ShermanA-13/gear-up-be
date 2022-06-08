@@ -1,14 +1,14 @@
 class Api::V1::UsersController < ApplicationController
-  # before_action :set_user, only: [:show, :]
+  before_action :set_user, only: [:show]
   def index
     users = User.all
     render json: UserSerializer.new(users)
   end
 
   def show
-    if valid_params?(User, params[:id], "user")
-      render json: UserSerializer.new(@object)
-    end
+    # if valid_params?(User, params[:id], "user")
+      render json: UserSerializer.new(@user)
+    # end
   end
 
   def create

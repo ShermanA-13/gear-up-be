@@ -22,6 +22,24 @@ class ApplicationController < ActionController::API
     render json: ErrorSerializer.new(error).serialized_json, status: 400
   end
 
+  def set_trip
+    if valid_params?(Trip, params[:trip_id], "trip")
+      @trip = @object
+    end
+  end
+
+  def set_user
+    if valid_params?(User, params[:user_id], "user")
+      @user = @object
+    end
+  end
+
+  def set_item
+    if valid_params?(Item, params[:item_id], "item")
+      @item = @object
+    end
+  end
+
   # def find_user(id)
   #   if User.exists?(id)
   #     @user = User.find(id)

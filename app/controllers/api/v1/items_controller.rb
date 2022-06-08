@@ -49,15 +49,15 @@ class Api::V1::ItemsController < ApplicationController
     params.require(:item).permit(:name, :description, :count, :category, :user_id)
   end
 
-  def set_item
-    if valid_params?(Item, params[:item_id], "item")
-      @item = @object
-    end
-  end
-
-  def set_user
-    if valid_params?(User, params[:user_id], "user")
-      @user = @object
-    end
-  end
+  # def set_item
+  #   if valid_params?(Item, params[:item_id], "item")
+  #     @item = @object
+  #   end
+  # end
+  #
+  # def set_user
+  #   if valid_params?(User, params[:user_id], "user")
+  #     @user = @object
+  #   end
+  # end
 end

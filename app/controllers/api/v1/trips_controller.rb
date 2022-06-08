@@ -49,15 +49,15 @@ class Api::V1::TripsController < ApplicationController
       params.require(:trip).permit(:name, :area_id, :description, :start_date, :end_date)
     end
 
-    def set_trip
-      if valid_params?(Trip, params[:id], "trip")
-        @trip = @object
-      end
-    end
-
-    def set_user
-      if valid_params?(User, params[:user_id], "user")
-        @user = @object
-      end
-    end
+    # def set_trip
+    #   if valid_params?(Trip, params[:trip_id], "trip")
+    #     @trip = @object
+    #   end
+    # end
+    #
+    # def set_user
+    #   if valid_params?(User, params[:user_id], "user")
+    #     @user = @object
+    #   end
+    # end
 end
