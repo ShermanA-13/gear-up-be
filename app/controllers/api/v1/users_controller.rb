@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :set_user, only: [:show]
 
   def index
     users = User.all
@@ -6,9 +7,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    if find_user(params[:id]).class == User
-      render json: UserSerializer.new(@user)
-    end
+    render json: UserSerializer.new(@user)
   end
 
   def create
@@ -20,7 +19,7 @@ class Api::V1::UsersController < ApplicationController
       if user.save
         render json: UserSerializer.new(user), status: :created
       else
-        creation_error(user)
+        database_error(user)
       end
     end
   end

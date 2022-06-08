@@ -11,7 +11,7 @@ class Trip < ApplicationRecord
 
   def end_date_later_than_start
     if end_date.present? && start_date.present? && end_date < start_date
-      errors.add(:end_date, "End date can not be before start date.")
+      errors.add(:end_date, "can not be before start date.")
     end
   end
 
