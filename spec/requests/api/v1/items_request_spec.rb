@@ -124,9 +124,6 @@ RSpec.describe "Items API" do
     expect(item_response[:errors].first[:code]).to eq(404)
   end
 
-
-
-
   it "can update an item" do
     id = create(:item, {user_id: user.id}).id
     previous_name = Item.last.name
@@ -139,6 +136,25 @@ RSpec.describe "Items API" do
     expect(response).to be_successful
     expect(item.name).to_not eq(previous_name)
     expect(item.name).to eq("Super Dope Climbing Thing")
+  end
+
+  it 'can not update an item with wrong attributes' do
+    item = create(:item, user_id: user.id)
+    previous_name = item.name
+    item_params = {name: ""}
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    patch "/api/v1/users/#{user.id}/items/#{item.id}", headers: headers, params: JSON.generate({item: item_params})
+
+    item_response = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response.status).to eq(400)
+    expect(item_response[:errors].first[:message]).to eq("Name can't be blank")
+    expect(item_response[:errors].first[:status]).to eq("INPUT ERROR")
+    expect(item_response[:errors].first[:code]).to eq(400)
+
+    not_updated_item = Item.find_by(id: item.id)
+    expect(not_updated_item.name).to eq(previous_name)
   end
 
   it "can destroy an item" do

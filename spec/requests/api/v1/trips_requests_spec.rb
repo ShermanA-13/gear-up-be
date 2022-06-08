@@ -151,7 +151,7 @@ RSpec.describe 'Trips API' do
 
       headers = {"CONTENT_TYPE" => "application/json"}
       post "/api/v1/users/#{user.id}/trips", headers: headers, params: JSON.generate(trip: trip_params)
-
+      require "pry"; binding.pry
       new_trip = Trip.last
 
       expect(response).to be_successful

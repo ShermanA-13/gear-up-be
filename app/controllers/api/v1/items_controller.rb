@@ -24,11 +24,13 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:item_id])
-    if item.update(item_params)
-      render json: ItemSerializer.new(item), status: 201
-    else
-      render status: 404
+    if find_item(params[:item_id]).class == Item
+      @item.update(item_params)
+      if @item.save
+        render json: ItemSerializer.new(@item), status: 201
+      else
+        database_error(@item)
+      end
     end
   end
 
