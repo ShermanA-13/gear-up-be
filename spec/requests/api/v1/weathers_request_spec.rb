@@ -5,6 +5,7 @@ RSpec.describe "Weathers API" do
     it 'gets all weathers for a trip' do
       user = create(:user)
       area = Area.create!(
+        id: 1728,
         name: "2. Fairfield Central",
         state: "Wyoming",
         url: "https://www.mountainproject.com/area/105827602/fairfield-central",
@@ -20,31 +21,18 @@ RSpec.describe "Weathers API" do
 
       get "/api/v1/areas/#{area.id}/weather"
 
-      weathers_response = JSON.parse(response.body, symbolize_names: true)
-      weathers = weathers_response[:data]
+      area_weather_response = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
 
-      weathers.each do |weather|
-        expect(weather[:id]).to be nil
-        expect(weather[:type]).to eq("weather")
-        expect(weather[:attributes][:temp]).to be_a(Float).or be_a Integer
-        expect(weather[:attributes][:feels_like]).to be_a(Float).or be_a Integer
-        expect(weather[:attributes][:temp_min]).to be_a(Float).or be_a Integer
-        expect(weather[:attributes][:temp_max]).to be_a(Float).or be_a Integer
-        expect(weather[:attributes][:humidity]).to be_a Integer
-        expect(weather[:attributes][:weather]).to be_a String
-        expect(weather[:attributes][:weather_description]).to be_a String
-        expect(weather[:attributes][:weather_icon]).to be_a String
-        expect(weather[:attributes][:cloud_coverage]).to be_a Integer
-        expect(weather[:attributes][:wind_speed]).to be_a(Float).or be_a Integer
-        expect(weather[:attributes][:wind_direction]).to be_a Integer
-        expect(weather[:attributes][:wind_gust]).to be_a(Float).or be_a Integer
-        expect(weather[:attributes][:visibility]).to be_a Integer
-        expect(weather[:attributes][:precipitation_probability]).to be_a(Float).or be_a Integer
-        expect(weather[:attributes][:sunrise]).to be_a String
-        expect(weather[:attributes][:sunset]).to be_a String
-      end
+      expect(area_weather_response).to have_key(:id)
+      expect(area_weather_response[:id]).to be_a Integer
+      expect(area_weather_response[:type]).to eq("weather info")
+      expect(area_weather_response[:name]).to be_a String
+      expect(area_weather_response[:weather]).to be_a Hash
+      expect(area_weather_response[:weather][:forecast]).to be_an Array
+      expect(area_weather_response[:weather][:forecast].first).to be_a Hash
+      expect(area_weather_response[:weather][:forecast].first[:weather]).to be_a Hash
     end
 
     it 'returns an error if the area does not exist' do
