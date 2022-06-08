@@ -1,5 +1,4 @@
 class Api::V1::WeathersController < ApplicationController
-  before_action :set_trip, only: [:index]
 
   def index
     weather = WeathersFacade.get_weather(location.lat, location.long)
@@ -8,6 +7,6 @@ class Api::V1::WeathersController < ApplicationController
 
   private
   def location
-    Area.find(@trip.area_id)
+    Area.find(params[:area_id])
   end
 end
