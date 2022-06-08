@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   delete "/api/v1/users/:user_id/items/:item_id", to: "api/v1/items#destroy"
 
   # Trips Endpoints
+  get "api/v1/trips/:trip_id/info", to: "api/v1/trips#info"
   get "/api/v1/users/:user_id/trips", to: "api/v1/trips#index"
   get "/api/v1/trips/:trip_id", to: "api/v1/trips#show"
   post "/api/v1/users/:user_id/trips", to: "api/v1/trips#create"
