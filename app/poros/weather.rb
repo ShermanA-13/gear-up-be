@@ -38,8 +38,4 @@ class Weather
     @sunrise = Time.zone.at(sunrise).strftime("%D at %T %Z")
     @sunset = Time.zone.at(sunset).strftime("%D at %T %Z")
   end
-
-  def self.by_dates
-    require "pry"; binding.pry
-  end
 end
