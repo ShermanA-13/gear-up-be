@@ -1,4 +1,7 @@
+# require "./app/serializers/weather_helper"
+
 class TripInfoSerializer
+  # include WeatherHelper
   def self.find_info(array)
     weather = array.select {|info| info.date.include?("12:00:00") }
     if weather.empty?
