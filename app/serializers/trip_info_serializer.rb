@@ -1,4 +1,7 @@
+# require "./app/serializers/weather_helper"
+
 class TripInfoSerializer
+  # include WeatherHelper
   def self.find_info(array)
     weather = array.select {|info| info.date.include?("12:00:00") }
     if weather.empty?
@@ -9,7 +12,7 @@ class TripInfoSerializer
   end
 
   def self.precipitation_calculation(array)
-    array.map {|info| info.percipitation_probability }.sum / array.count
+    array.map {|info| info.precipitation_probability }.sum / array.count
   end
 
   def self.trip_info(trip, weather)
@@ -56,7 +59,7 @@ class TripInfoSerializer
                  cloud_coverage: find_info(info).cloud_coverage,
                  feels_like: find_info(info).feels_like,
                  humidity: find_info(info).humidity,
-                 percipitation_probability: precipitation_calculation(info),
+                 precipitation_probability: precipitation_calculation(info),
                  visibility: find_info(info).visibility,
                  weather: find_info(info).weather,
                  weather_description: find_info(info).weather_description,

@@ -1,5 +1,5 @@
 class Api::V1::TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :update, :destroy]
+  before_action :set_trip, only: [:show, :update, :destroy, :info]
   before_action :set_user, only: [:index]
 
   def index
@@ -33,11 +33,16 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def destroy
-      @trip.destroy
+    @trip.destroy
+  end
+
+  def info
+    render json: TripSerializer.new(@trip)
   end
 
   private
-    def trip_params
-      params.require(:trip).permit(:name, :area_id, :description, :start_date, :end_date)
-    end
+
+  def trip_params
+    params.require(:trip).permit(:name, :area_id, :description, :start_date, :end_date)
+  end
 end
