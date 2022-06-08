@@ -8,7 +8,7 @@ class Api::V1::TripUsersController < ApplicationController
     params[:users].each do |user|
       TripUser.create(trip_id: @trip.id, user_id: user, host: false)
     end
-    render status: :created
+    render status: :created, json: TripSerializer.new(@trip)
   end
 
   def update
@@ -17,7 +17,7 @@ class Api::V1::TripUsersController < ApplicationController
         TripUser.create(trip_id: @trip.id, user_id: user, host: false)
       end
     end
-    @trip.users_to_remove(params[:users]).each {|user| user.destroy}
+    @trip.users_to_remove(params[:users]).each { |user| user.destroy }
     render status: 200
   end
 end
