@@ -17,6 +17,12 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def set_area
+    if valid_params?(Area, params[:area_id], "area")
+      @area = @object
+    end
+  end
+
   def valid_params?(type, id, type_name)
     object_present?(type, id, type_name).class == type
   end
