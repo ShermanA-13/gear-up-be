@@ -17,6 +17,10 @@ class ApplicationController < ActionController::API
     object_present?(type, id, type_name).class == type
   end
 
+  def database_error(object)
+    error = Error.new(400, "INPUT ERROR", object.errors.full_messages.to_sentence)
+    render json: ErrorSerializer.new(error).serialized_json, status: 400
+  end
 
   # def find_user(id)
   #   if User.exists?(id)
@@ -45,8 +49,4 @@ class ApplicationController < ActionController::API
   #   end
   # end
 
-  def database_error(object)
-    error = Error.new(400, "INPUT ERROR", object.errors.full_messages.to_sentence)
-    render json: ErrorSerializer.new(error).serialized_json, status: 400
-  end
 end
