@@ -30,7 +30,8 @@ class TripInfoSerializer
               id: user.id,
               first_name: user.first_name,
               last_name: user.last_name,
-              email: user.email
+              email: user.email,
+              user_photo: user.user_photo
             }
           end,
       items: trip.items.map do |item|

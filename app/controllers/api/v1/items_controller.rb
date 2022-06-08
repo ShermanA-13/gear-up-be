@@ -1,29 +1,35 @@
 class Api::V1::ItemsController < ApplicationController
+  before_action :set_item, only: [:show, :update, :destroy]
+  before_action :set_user
 
   def index
-    render json: ItemSerializer.new(Item.where("user_id = ?", params[:user_id]))
+    render json: ItemSerializer.new(@user.items)
   end
 
   def show
-    render json: ItemSerializer.new(Item.find(params[:item_id]))
+    render json: ItemSerializer.new(@item)
   end
 
   def create
-    render json: ItemSerializer.new(Item.create!(item_params)), status: :created
+    item = Item.new(item_params)
+    if item.save
+      render json: ItemSerializer.new(item), status: :created
+    else
+      database_error(item)
+    end
   end
 
   def update
-    item = Item.find(params[:item_id])
-    if item.update(item_params)
-      render json: ItemSerializer.new(item), status: 201
+    @item.update(item_params)
+    if @item.save
+      render json: ItemSerializer.new(@item), status: 201
     else
-      render status: 404
+      database_error(@item)
     end
   end
 
   def destroy
-    item = Item.find(params[:item_id])
-    item.destroy
+    @item.destroy
     render status: 204
   end
 

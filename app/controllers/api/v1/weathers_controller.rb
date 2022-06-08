@@ -7,7 +7,6 @@ class Api::V1::WeathersController < ApplicationController
 
   private
   def location
-    trip = Trip.find(params[:trip_id])
-    Area.find(trip.area_id)
+    Area.find(params[:area_id])
   end
 end

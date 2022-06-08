@@ -1,15 +1,15 @@
 class Api::V1::TripsController < ApplicationController
+  before_action :set_trip, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:index]
+
   def index
-    trips = Trip.user_trips(params[:user_id])
+    trips = Trip.user_trips(@user)
     render json: TripSerializer.new(trips)
   end
 
   def show
-    if Trip.exists?(params[:id])
-      trip = Trip.find(params[:id])
-      weather = WeathersFacade.get_weather(trip.area.lat, trip.area.long)
-      render json: TripInfoSerializer.trip_info(trip, weather)
-    end
+    weather = WeathersFacade.get_weather(@trip.area.lat, @trip.area.long)
+    render json: TripInfoSerializer.trip_info(@trip, weather)
   end
 
   def create
@@ -18,18 +18,22 @@ class Api::V1::TripsController < ApplicationController
     if trip.save
       TripUser.create(user_id: params[:user_id], trip_id: trip.id, host: true)
       render json: TripSerializer.new(trip), status: :created
+    else
+      database_error(trip)
     end
   end
 
   def update
-    trip = Trip.update(params[:id], trip_params)
-    render json: TripSerializer.new(trip) if trip.save
+    @trip.update(trip_params)
+    if @trip.save
+      render json: TripSerializer.new(@trip)
+    else
+      database_error(@trip)
+    end
   end
 
   def destroy
-    if Trip.exists?(params[:id])
-      Trip.destroy(params[:id])
-    end
+      @trip.destroy
   end
 
   private

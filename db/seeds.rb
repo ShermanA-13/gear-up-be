@@ -25,6 +25,7 @@ Trip.destroy_all
 Item.destroy_all
 User.destroy_all
 
+
 user_1 = User.create!(id: 1, first_name: "something", last_name: "this", email: "email@email.com")
 user_2 = User.create!(id: 2, first_name: "asda", last_name: "this", email: "cheese@email.com")
 user_3 = User.create!(id: 3, first_name: "monkey", last_name: "this", email: "foo@email.com")
@@ -33,6 +34,7 @@ item_1 = Item.create!(user_id: user_1.id, name: "Water Bottle", category: 1, cou
 item_2 = Item.create!(user_id: user_1.id, name: "Trail Mix", category: 2, count: 8)
 item_3 = Item.create!(user_id: user_2.id, name: "Good Socks", category: 3, count: 3)
 item_4 = Item.create!(user_id: user_2.id, name: "Fancy Tent", category: 4, count: 1)
+
 
 area = Area.create!(
   name: "2. Fairfield Central",
