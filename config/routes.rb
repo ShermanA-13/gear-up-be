@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   # Weather Endpoint
   get "/api/v1/trips/:trip_id/weather", to: "api/v1/weathers#index"
 
-  # Areas Search Endpoint
+  # Areas Endpoints
   get "/api/v1/areas/find_all", to: "api/v1/areas#find_all"
   get "/api/v1/areas/:id", to: "api/v1/areas#show"
 end
