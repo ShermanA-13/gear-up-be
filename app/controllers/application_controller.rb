@@ -1,24 +1,24 @@
 class ApplicationController < ActionController::API
 
-  def object_present?(type, id, type_name)
-    if type.exists?(id)
-      @object = type.find(id)
-    else
-      @error = Error.new(404, "NOT FOUND", "No #{type_name} with id #{id}")
-      not_found(@error)
-    end
-  end
-
-  def not_found(error)
-    render json: ErrorSerializer.new(@error).serialized_json, status: 404
-  end
-
   def valid_params?(type, id, type_name)
     object_present?(type, id, type_name).class == type
   end
 
-  def database_error(object)
-    error = Error.new(400, "INPUT ERROR", object.errors.full_messages.to_sentence)
+  def object_present?(type, id, type_name)
+    if type.exists?(id)
+      @object = type.find(id)
+    else
+      error = Error.new(404, "NOT FOUND", "No #{type_name} with id #{id}")
+      not_found_error(error)
+    end
+  end
+
+  def not_found_error(error)
+    render json: ErrorSerializer.new(error).serialized_json, status: 404
+  end
+
+  def database_error(error_object)
+    error = Error.new(400, "INPUT ERROR", error_object.errors.full_messages.to_sentence)
     render json: ErrorSerializer.new(error).serialized_json, status: 400
   end
 
