@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-
+  # before_action :set_user, only: [:show, :]
   def index
     users = User.all
     render json: UserSerializer.new(users)
