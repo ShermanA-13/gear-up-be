@@ -5,17 +5,19 @@ class Item < ApplicationRecord
 
   validates_presence_of :name, :category
   validates_numericality_of :count, greater_than: 0
+  validates_inclusion_of :category, in: [0..9]
 
-  enum category: {
-    "Tents" => 0,
-    "Sleeping Bag" => 1,
-    "Stoves, Grills & Fuel" => 2,
-    "Cookware" => 3,
-    "Dishes" => 4,
-    "Ropes" => 5,
-    "Harnesses" => 6,
-    "Belay & Rappel" => 7,
-    "Crash Pads" => 8,
-    "Quickdraws" => 9
-  }
+  # enum category: {
+  #    0 => "Tents",
+  #    1 => "Sleeping Bag",
+  #    2 => "Stoves, Grills & Fuel",
+  #    3 => "Cookware",
+  #    4 => "Dishes",
+  #    5 => "Ropes",
+  #    6 => "Harnesses",
+  #    7 => "Belay & Rappel",
+  #    8 => "Crash Pads",
+  #    9 => "Quickdraws"
+  # }
+  # enum category: %w[tents sleeping_bag stoves_grills_fuel cookware dishes ropes harnesses belay_and_rappel crash_pads quickdraws]
 end

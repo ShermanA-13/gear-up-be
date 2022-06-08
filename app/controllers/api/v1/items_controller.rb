@@ -11,6 +11,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
+    require "pry"; binding.pry
     item = Item.new(item_params)
     if item.save
       render json: ItemSerializer.new(item), status: :created
