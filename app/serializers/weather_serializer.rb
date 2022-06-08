@@ -14,7 +14,7 @@ class WeatherSerializer
              :wind_direction,
              :wind_gust,
              :visibility,
-             :percipitation_probability,
+             :precipitation_probability,
              :sunrise,
              :sunset
 end
