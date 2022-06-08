@@ -4,7 +4,12 @@ RSpec.describe "Weathers API" do
   describe 'all weathers' do
     it 'gets all weathers for a trip' do
       user = create(:user)
-      area = create(:area)
+      area = Area.create!(
+  name: "2. Fairfield Central",
+  state: "Wyoming",
+  url: "https://www.mountainproject.com/area/105827602/fairfield-central",
+  long: "-108.84939",
+  lat: "42.73982")
       trip_list = create_list(:trip, 5, area: area)
       trip = trip_list[0]
 
@@ -13,7 +18,7 @@ RSpec.describe "Weathers API" do
       user_trip3 = TripUser.create!(trip: trip_list[3], user: user, host: false)
       user_trip4 = TripUser.create!(trip: trip_list[4], user: user, host: false)
 
-      get "/api/v1/trips/#{trip.id}/weather"
+      get "/api/v1/areas/#{area.id}/weather"
 
       weathers_response = JSON.parse(response.body, symbolize_names: true)
       weathers = weathers_response[:data]
