@@ -1,5 +1,6 @@
 class Weather
   attr_reader :id,
+              :date,
               :temp,
               :feels_like,
               :temp_min,
@@ -13,12 +14,13 @@ class Weather
               :wind_direction,
               :wind_gust,
               :visibility,
-              :percipitation_probability,
+              :precipitation_probability,
               :sunrise,
               :sunset
 
   def initialize(data, sunrise, sunset)
     @id = nil
+    @date = data[:dt_txt]
     @temp = data[:main][:temp]
     @feels_like = data[:main][:feels_like]
     @temp_min = data[:main][:temp_min]
@@ -32,7 +34,7 @@ class Weather
     @wind_direction = data[:wind][:deg]
     @wind_gust = data[:wind][:gust]
     @visibility = data[:visibility]
-    @percipitation_probability = data[:pop]
+    @precipitation_probability = data[:pop]
     @sunrise = Time.zone.at(sunrise).strftime("%D at %T %Z")
     @sunset = Time.zone.at(sunset).strftime("%D at %T %Z")
   end

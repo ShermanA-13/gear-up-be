@@ -23,4 +23,24 @@ RSpec.describe "Areas API" do
     expect(results[0][:attributes][:name]).to eq("Devil's Lake")
     expect(results[0][:attributes][:name]).to_not eq(area_list.sample.name)
   end
+
+  it 'returns an error if search is missing' do
+    get "/api/v1/areas/find_all?"
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response.status).to eq(400)
+    expect(parsed[:errors].first[:status]).to eq("EMPTY SEARCH")
+    expect(parsed[:errors].first[:code]).to eq(400)
+    expect(parsed[:errors].first[:message]).to eq("Search can not be empty")
+  end
+
+  it 'returns an error if search is blank' do
+    get "/api/v1/areas/find_all?name="
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response.status).to eq(400)
+    expect(parsed[:errors].first[:status]).to eq("EMPTY SEARCH")
+    expect(parsed[:errors].first[:code]).to eq(400)
+    expect(parsed[:errors].first[:message]).to eq("Search can not be empty")
+  end
 end

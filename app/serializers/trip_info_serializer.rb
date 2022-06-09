@@ -1,5 +1,7 @@
-class WeatherSerializer
-  include JSONAPI::Serializer
+# require "./app/serializers/weather_helper"
+
+class TripInfoSerializer
+  # include WeatherHelper
   def self.find_info(array)
     weather = array.select {|info| info.date.include?("12:00:00") }
     if weather.empty?
@@ -13,11 +15,38 @@ class WeatherSerializer
     array.map {|info| info.precipitation_probability }.sum / array.count
   end
 
-  def self.area_weather(area, weather)
+  def self.trip_info(trip, weather)
     {
-      id: area.id,
-      type: "weather info",
-      name: area.name,
+      id: trip.id,
+      type: "trip info",
+      name: trip.name,
+      start_date: trip.start_date,
+      end_date: trip.end_date,
+      host: User.find(trip.host_id).first_name,
+      description: trip.description,
+      lat: trip.area.lat,
+      long: trip.area.long,
+      area: trip.area.name,
+      state: trip.area.state,
+      users: trip.users.map do |user|
+            {
+              id: user.id,
+              first_name: user.first_name,
+              last_name: user.last_name,
+              email: user.email,
+              user_photo: user.user_photo
+            }
+          end,
+      items: trip.items.map do |item|
+            {
+              id: item.id,
+              name: item.name,
+              description: item.description,
+              count: item.count,
+              category: item.category,
+              owner: item.user.first_name
+            }
+          end,
       weather: if weather.class == String
                   weather
               else

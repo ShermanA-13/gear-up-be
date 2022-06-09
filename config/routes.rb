@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   # Users Endpoints
   get "/api/v1/users", to: "api/v1/users#index"
-  get "/api/v1/users/:id", to: "api/v1/users#show"
+  get "/api/v1/users/:user_id", to: "api/v1/users#show"
   post "/api/v1/users", to: "api/v1/users#create"
 
   # Items Endpoints
@@ -14,25 +14,31 @@ Rails.application.routes.draw do
   delete "/api/v1/users/:user_id/items/:item_id", to: "api/v1/items#destroy"
 
   # Trips Endpoints
+  get "api/v1/trips/:trip_id/info", to: "api/v1/trips#info"
   get "/api/v1/users/:user_id/trips", to: "api/v1/trips#index"
-  get "/api/v1/trips/:id", to: "api/v1/trips#show"
+  get "/api/v1/trips/:trip_id", to: "api/v1/trips#show"
   post "/api/v1/users/:user_id/trips", to: "api/v1/trips#create"
-  patch "/api/v1/trips/:id", to: "api/v1/trips#update"
-  delete "/api/v1/trips/:id", to: "api/v1/trips#destroy"
+  patch "/api/v1/trips/:trip_id", to: "api/v1/trips#update"
+  delete "/api/v1/trips/:trip_id", to: "api/v1/trips#destroy"
 
   # Trip Users Endpoints
-  get "/api/v1/trips/:id/users", to: "api/v1/trip_users#index"
-  post "/api/v1/trips/:id/users", to: "api/v1/trip_users#create"
-  patch "/api/v1/trips/:id/users", to: "api/v1/trip_users#update"
+  get "/api/v1/trips/:trip_id/users", to: "api/v1/trip_users#index"
+  post "/api/v1/trips/:trip_id/users", to: "api/v1/trip_users#create"
+  patch "/api/v1/trips/:trip_id/users", to: "api/v1/trip_users#update"
 
   # Trip Items Endpoints
-  get "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#index"
+  get "/api/v1/trips/:trip_id/items/:user_id", to: "api/v1/trip_items#index"
+  get "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#show"
   post "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#create"
+  patch "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#update"
   delete "/api/v1/trips/:trip_id/items/:trip_item_id", to: "api/v1/trip_items#destroy"
 
   # Weather Endpoint
-  get "/api/v1/trips/:trip_id/weather", to: "api/v1/weathers#index"
+  get "/api/v1/areas/:area_id/weather", to: "api/v1/weathers#index"
 
-  # Areas Search Endpoint
+  # Areas Endpoints
   get "/api/v1/areas/find_all", to: "api/v1/areas#find_all"
+  get "/api/v1/areas/:id", to: "api/v1/areas#show"
 end
+
+# happy routes

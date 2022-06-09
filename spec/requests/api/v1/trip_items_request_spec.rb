@@ -44,19 +44,16 @@ RSpec.describe "Trip Items API" do
       user_id: user_1.id
     )
 
-    trip_item_params = {
-      trip_id: trip.id,
-      item_id: item.id
-    }
+    trip_item_params = [item.id]
 
     headers = {"CONTENT_TYPE" => "application/json"}
 
-    post "/api/v1/trips/#{trip.id}/items", headers: headers, params: JSON.generate(trip_item: trip_item_params)
+    post "/api/v1/trips/#{trip.id}/items", headers: headers, params: JSON.generate(items: trip_item_params)
     created_trip_item = TripItem.last
 
     expect(response).to be_successful
-    expect(created_trip_item.trip_id).to eq(trip_item_params[:trip_id])
-    expect(created_trip_item.item_id).to eq(trip_item_params[:item_id])
+    expect(created_trip_item.trip_id).to eq(trip.id)
+    expect(created_trip_item.item_id).to eq(item.id)
   end
 
   it "can destroy a trip item" do
