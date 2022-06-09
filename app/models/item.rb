@@ -5,7 +5,7 @@ class Item < ApplicationRecord
 
   validates_presence_of :name, :category
   validates_numericality_of :count, greater_than: 0
-  validates_inclusion_of :category, in: [0..9]
+  # validates_inclusion_of :category, in: [0..9]
 
   # enum category: {
   #    0 => "Tents",

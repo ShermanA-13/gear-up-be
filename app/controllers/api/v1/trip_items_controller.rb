@@ -1,10 +1,14 @@
 class Api::V1::TripItemsController < ApplicationController
+  before_action :set_trip, only: [:create]
   def index
     render json: TripItemSerializer.new(TripItem.where("trip_id = ?", params[:trip_id]))
   end
 
   def create
-    render json: TripItemSerializer.new(TripItem.create!(trip_item_params)), status: :created
+    trip_items = params[:items].map do |id|
+      TripItem.create(item_id: id, trip_id: @trip.id)
+    end
+    render json: TripItemSerializer.new(trip_items), status: :created
   end
 
   def destroy
