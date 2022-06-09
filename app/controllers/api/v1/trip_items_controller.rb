@@ -12,10 +12,14 @@ class Api::V1::TripItemsController < ApplicationController
   end
 
   def create
-    trip_items = params[:items].map do |id|
+    if params[:items].nil?
+      render json: TripSerializer.new(@trip)
+    else
+      trip_items = params[:items].map do |id|
         TripItem.create(item_id: id, trip_id: @trip.id)
+      end
+      render json: TripItemSerializer.new(trip_items), status: :created
     end
-    render json: TripItemSerializer.new(trip_items), status: :created
   end
 
   def destroy
@@ -31,7 +35,7 @@ class Api::V1::TripItemsController < ApplicationController
           TripItem.create(trip_id: @trip.id, item_id: item)
         end
       end
-      @trip.items_to_remove(params[:items]).each { |item| item.destroy }
+      @user.missing_trip_items(params[:items], @trip).each { |item| item.destroy }
     else
       @user.trip_items_delete(@trip.id).each {|item| item.destroy}
     end
