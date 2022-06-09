@@ -22,4 +22,8 @@ class Trip < ApplicationRecord
   def users_to_remove(ids)
     trip_users.where.not(user_id: ids)
   end
+
+  def items_to_remove(ids)
+    trip_items.where.not(item_id: ids)
+  end
 end

@@ -10,4 +10,8 @@ class User < ApplicationRecord
   def self.users_on_trip(id)
     joins(:trip_users).where(trip_users: {trip_id: id})
   end
+
+  def items_on_trip(id)
+    items.joins(:trip_items).where("trip_items.trip_id = ?", id)
+  end
 end
