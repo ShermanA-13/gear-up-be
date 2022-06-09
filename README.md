@@ -369,31 +369,31 @@ From your Heroku dashboard, click on the project you just created, then Settings
 <p>
 
 ```sh
-        api_v1_users  GET    /api/v1/users(.:format)                                                                  api/v1/users#index
-                      GET    /api/v1/users/:user_id(.:format)                                                         api/v1/users#show
-                      POST   /api/v1/users(.:format)                                                                  api/v1/users#create
-                      GET    /api/v1/users/:user_id/items(.:format)                                                   api/v1/items#index
-                      GET    /api/v1/users/:user_id/items/:item_id(.:format)                                          api/v1/items#show
-                      POST   /api/v1/users/:user_id/items(.:format)                                                   api/v1/items#create
-                      PATCH  /api/v1/users/:user_id/items/:item_id(.:format)                                          api/v1/items#update
-                      DELETE /api/v1/users/:user_id/items/:item_id(.:format)                                          api/v1/items#destroy
-                      GET    /api/v1/trips/:trip_id/info(.:format)                                                    api/v1/trips#info
-                      GET    /api/v1/users/:user_id/trips(.:format)                                                   api/v1/trips#index
-                      GET    /api/v1/trips/:trip_id(.:format)                                                         api/v1/trips#show
-                      POST   /api/v1/users/:user_id/trips(.:format)                                                   api/v1/trips#create
-                      PATCH  /api/v1/trips/:trip_id(.:format)                                                         api/v1/trips#update
-                      DELETE /api/v1/trips/:trip_id(.:format)                                                         api/v1/trips#destroy
-                      GET    /api/v1/trips/:trip_id/users(.:format)                                                   api/v1/trip_users#index
-                      POST   /api/v1/trips/:trip_id/users(.:format)                                                   api/v1/trip_users#create
-                      PATCH  /api/v1/trips/:trip_id/users(.:format)                                                   api/v1/trip_users#update
-                      GET    /api/v1/trips/:trip_id/items/:user_id(.:format)                                          api/v1/trip_items#index
-                      GET    /api/v1/trips/:trip_id/items(.:format)                                                   api/v1/trip_items#show
-                      POST   /api/v1/trips/:trip_id/items(.:format)                                                   api/v1/trip_items#create
-                      PATCH  /api/v1/trips/:trip_id/items(.:format)                                                   api/v1/trip_items#update
-                      DELETE /api/v1/trips/:trip_id/items/:trip_item_id(.:format)                                     api/v1/trip_items#destroy
-                      GET    /api/v1/areas/:area_id/weather(.:format)                                                 api/v1/weathers#index
-api_v1_areas_find_all GET    /api/v1/areas/find_all(.:format)                                                         api/v1/areas#find_all
-                      GET    /api/v1/areas/:id(.:format)                                                              api/v1/areas#show
+        api_v1_users    GET    /api/v1/users(.:format)                                   api/v1/users#index
+                        GET    /api/v1/users/:user_id(.:format)                          api/v1/users#show
+                        POST   /api/v1/users(.:format)                                   api/v1/users#create
+                        GET    /api/v1/users/:user_id/items(.:format)                    api/v1/items#index
+                        GET    /api/v1/users/:user_id/items/:item_id(.:format)           api/v1/items#show
+                        POST   /api/v1/users/:user_id/items(.:format)                    api/v1/items#create
+                        PATCH  /api/v1/users/:user_id/items/:item_id(.:format)           api/v1/items#update
+                        DELETE /api/v1/users/:user_id/items/:item_id(.:format)           api/v1/items#destroy
+                        GET    /api/v1/trips/:trip_id/info(.:format)                     api/v1/trips#info
+                        GET    /api/v1/users/:user_id/trips(.:format)                    api/v1/trips#index
+                        GET    /api/v1/trips/:trip_id(.:format)                          api/v1/trips#show
+                        POST   /api/v1/users/:user_id/trips(.:format)                    api/v1/trips#create
+                        PATCH  /api/v1/trips/:trip_id(.:format)                          api/v1/trips#update
+                        DELETE /api/v1/trips/:trip_id(.:format)                          api/v1/trips#destroy
+                        GET    /api/v1/trips/:trip_id/users(.:format)                    api/v1/trip_users#index
+                        POST   /api/v1/trips/:trip_id/users(.:format)                    api/v1/trip_users#create
+                        PATCH  /api/v1/trips/:trip_id/users(.:format)                    api/v1/trip_users#update
+                        GET    /api/v1/trips/:trip_id/items/:user_id(.:format)           api/v1/trip_items#index
+                        GET    /api/v1/trips/:trip_id/items(.:format)                    api/v1/trip_items#show
+                        POST   /api/v1/trips/:trip_id/items(.:format)                    api/v1/trip_items#create
+                        PATCH  /api/v1/trips/:trip_id/items(.:format)                    api/v1/trip_items#update
+                        DELETE /api/v1/trips/:trip_id/items/:trip_item_id(.:format)      api/v1/trip_items#destroy
+                        GET    /api/v1/areas/:area_id/weather(.:format)                  api/v1/weathers#index
+api_v1_areas_find_all   GET    /api/v1/areas/find_all(.:format)                          api/v1/areas#find_all
+                        GET    /api/v1/areas/:id(.:format)                               api/v1/areas#show
 ```
 
 </p>
