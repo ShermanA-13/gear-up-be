@@ -14,4 +14,8 @@ class User < ApplicationRecord
   def items_on_trip(id)
     items.joins(:trip_items).where("trip_items.trip_id = ?", id)
   end
+
+  def trip_items_delete(id)
+    trip_items.where(trip_id: id)
+  end
 end

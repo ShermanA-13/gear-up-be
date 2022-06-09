@@ -1,6 +1,6 @@
 class Api::V1::TripItemsController < ApplicationController
   before_action :set_trip, only: [:create, :index, :update, :show]
-  before_action :set_user, only: [:index]
+  before_action :set_user, only: [:index, :update]
 
   def index
     items = @user.items_on_trip(params[:trip_id])
@@ -32,6 +32,8 @@ class Api::V1::TripItemsController < ApplicationController
         end
       end
       @trip.items_to_remove(params[:items]).each { |item| item.destroy }
+    else
+      @user.trip_items_delete(@trip.id).each {|item| item.destroy}
     end
     render json: TripSerializer.new(@trip), status: 200
   end
