@@ -30,7 +30,7 @@ Logistics for group adventures outdoors can be quite complicated. Gear UP is a w
     - [SetUp](#setup)
 - [Heroku Setup](#heroku-setup)
 - [Endpoints](#endpoints-provided)
-- [Contributors](#contributors-✨)
+- [Contributors](#contributors-)
 ## **Schema**
 ![plot](./docs/images/gear_up_schema.png)
 ## **Learning Goals**
