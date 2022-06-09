@@ -30,7 +30,7 @@ Logistics for group adventures outdoors can be quite complicated. Gear UP is a w
     - [SetUp](#setup)
 - [Heroku Setup](#heroku-setup)
 - [Endpoints](#endpoints-provided)
-- [Contributors](#contributors-✨)
+- [Contributors](#contributors-)
 ## **Schema**
 ![plot](./docs/images/gear_up_schema.png)
 ## **Learning Goals**
@@ -410,9 +410,9 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
 
   <tr>
 
-   <td align="center"><a href="https://github.com/ShermanA-13"><img src="https://avatars.githubusercontent.com/u/95321606?s=400&u=90b2d52424bfbec5411b711901d4789f2e40c470&v=4" width="100px;" alt=""/><br /><sub><b>Sherman A. (he/him)</b></sub></a><br /><a href="https://www.linkedin.com/in/sherman-au-2b4a69142/" title ="Linked In"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a><br /><a href="https://github.com/ShermanA-13/gear-up-be/commits?author=ShermanA-13" title="Code">💻</a> <a href="" title="Ideas, Planning, & Feedback">�</a> <a href="" title="Tests">⚠️</a> <a href="" title="Reviewed Pull Requests">👀</a></td>
+   <td align="center"><a href="https://github.com/ShermanA-13"><img src="https://avatars.githubusercontent.com/u/95321606?s=400&u=90b2d52424bfbec5411b711901d4789f2e40c470&v=4" width="100px;" alt=""/><br /><sub><b>Sherman A. (he/him)</b></sub></a><br /><a href="https://www.linkedin.com/in/sherman-au-2b4a69142/" title ="Linked In"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a><br /><a href="https://github.com/ShermanA-13/gear-up-be/commits?author=ShermanA-13" title="Code">💻</a> <a href="" title="Ideas, Planning, & Feedback">�</a> <a href="" title="Tests">⚠️</a> <a href="https://github.com/ShermanA-13/gear-up-be/pulls?q=is%3Apr+author%3AShermanA-13" title="Reviewed Pull Requests">👀</a></td>
 
-   <td align="center"><a href="https://github.com/sueboyd922"><img src="https://avatars.githubusercontent.com/u/96309924?v=4" width="100px;" alt=""/><br /><sub><b>Susan B. (she/her)</b></sub></a><br /><a href="https://www.linkedin.com/in/susan-boyd-6ba8749b/" title ="Linked In"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a><br /><a href="https://github.com/ShermanA-13/gear-up-be/commits?author=sueboyd922" title="Code">💻</a> <a href="" title="Ideas, Planning, & Feedback">�</a> <a href="https://github.com/ShermanA-13/gear-up-be/pulls?q=is%3Apr+author%3Asueboyd922" title="Tests">⚠️</a> <a href="https://github.com/ShermanA-13/gear-up-be/pulls?q=is%3Apr+author%3AShermanA-13" title="Reviewed Pull Requests">👀</a></td>
+   <td align="center"><a href="https://github.com/sueboyd922"><img src="https://avatars.githubusercontent.com/u/96309924?v=4" width="100px;" alt=""/><br /><sub><b>Susan B. (she/her)</b></sub></a><br /><a href="https://www.linkedin.com/in/susan-boyd-6ba8749b/" title ="Linked In"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a><br /><a href="https://github.com/ShermanA-13/gear-up-be/commits?author=sueboyd922" title="Code">💻</a> <a href="" title="Ideas, Planning, & Feedback">�</a> <a href="" title="Tests">⚠️</a> <a href="https://github.com/ShermanA-13/gear-up-be/pulls?q=is%3Apr+author%3Asueboyd922" title="Reviewed Pull Requests">👀</a></td>
 
    <td align="center"><a href="https://github.com/phillipkamps/landing_page"><img src="https://avatars.githubusercontent.com/u/56653844?v=4" width="100px;" alt=""/><br /><sub><b>Phillp K. (he/him)</b></sub></a><br /><a href="https://www.linkedin.com/in/phillip-kamps/" title ="Linked In"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a><br /><a href="https://github.com/ShermanA-13/gear-up-be/commits?author=phillipkamps" title="Code">💻</a> <a href="" title="Ideas, Planning, & Feedback">�</a> <a href="" title="Tests">⚠️</a> <a href="https://github.com/ShermanA-13/gear-up-be/pulls?q=is%3Apr+author%3Aphillipkamps" title="Reviewed Pull Requests">👀</a></td>
 
