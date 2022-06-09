@@ -17,7 +17,7 @@ RSpec.describe "Items API" do
       expect(item[:attributes][:name]).to be_a(String)
       expect(item[:attributes][:description]).to be_a(String)
       expect(item[:attributes][:count]).to be_an(Integer)
-      expect(item[:attributes][:category]).to be_an(String)
+      expect(item[:attributes][:category]).to be_an(Integer)
     end
   end
 
@@ -71,7 +71,7 @@ RSpec.describe "Items API" do
       name: "Organic Crash Pad",
       description: "Super soft and thicc, heavy though",
       count: 1,
-      category: "Crash Pads",
+      category: 0,
       user_id: user.id
     }
 

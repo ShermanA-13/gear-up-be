@@ -27,8 +27,10 @@ Rails.application.routes.draw do
   patch "/api/v1/trips/:trip_id/users", to: "api/v1/trip_users#update"
 
   # Trip Items Endpoints
-  get "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#index"
+  get "/api/v1/trips/:trip_id/items/:user_id", to: "api/v1/trip_items#index"
+  get "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#show"
   post "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#create"
+  patch "/api/v1/trips/:trip_id/items", to: "api/v1/trip_items#update"
   delete "/api/v1/trips/:trip_id/items/:trip_item_id", to: "api/v1/trip_items#destroy"
 
   # Weather Endpoint

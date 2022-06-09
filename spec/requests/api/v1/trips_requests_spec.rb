@@ -102,7 +102,7 @@ RSpec.describe 'Trips API' do
       expect(trips_response[:items].first[:name]).to be_an String
       expect(trips_response[:items].first[:description]).to be_an String
       expect(trips_response[:items].first[:count]).to be_an Integer
-      expect(trips_response[:items].first[:category]).to be_an String
+      expect(trips_response[:items].first[:category]).to be_an Integer
       expect(trips_response[:items].first[:owner]).to be_an String
       expect(trips_response[:weather]).to be_a Hash
       expect(trips_response[:weather][:forecast]).to be_an Array
