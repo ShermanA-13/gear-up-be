@@ -9,6 +9,13 @@
 ![miro](https://img.shields.io/badge/Miro-050038?style=for-the-badge&logo=Miro&logoColor=white)
 ![postgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
+<hr>
+
+<p align="center">
+  <img src="./docs/images/gear_up_long_logo.png" alt="logo" width="80%"/>
+</p>
+
+<hr>
 
 ## **Background and Description**
 Logistics for group adventures outdoors can be quite complicated. Gear UP is a web app that simplifies this issue by giving groups a platform to organize gear and who is responsible for bringing what.
