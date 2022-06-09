@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   has_many :trip_items, dependent: :destroy
   has_many :trips, through: :trip_items
 
-  validates_presence_of :name, :category
+  validates_presence_of :name, :category, :description
   validates_numericality_of :count, greater_than: 0
   # validates_inclusion_of :category, in: [0..9]
 

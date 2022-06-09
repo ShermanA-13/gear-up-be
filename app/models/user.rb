@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def trip_items_delete(id)
     trip_items.where(trip_id: id)
   end
+
+  def missing_trip_items(ids, trip)
+    trip_items.where.not(item_id: ids).where(trip_id: trip.id)
+  end
 end
