@@ -26,6 +26,7 @@ class TripInfoSerializer
       description: trip.description,
       lat: trip.area.lat,
       long: trip.area.long,
+      url: trip.area.url,
       area: trip.area.name,
       state: trip.area.state,
       users: trip.users.map do |user|
