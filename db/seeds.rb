@@ -34,6 +34,7 @@ item_1 = Item.create!(user_id: user_1.id, name: "Water Bottle", category: 1, cou
 item_2 = Item.create!(user_id: user_1.id, name: "Trail Mix", category: 2, count: 8)
 item_3 = Item.create!(user_id: user_2.id, name: "Good Socks", category: 3, count: 3)
 item_4 = Item.create!(user_id: user_2.id, name: "Fancy Tent", category: 4, count: 1)
+item_5 = Item.create!(user_id: user_3.id, name: "Quickdraws", category: 0, count: 1)
 
 
 area = Area.create!(
@@ -67,3 +68,10 @@ TripUser.create!(trip_id: trip_1.id, user_id: user_2.id, host: false)
 TripUser.create!(trip_id: trip_2.id, user_id: user_3.id, host: true)
 TripUser.create!(trip_id: trip_2.id, user_id: user_2.id, host: false)
 TripUser.create!(trip_id: trip_2.id, user_id: user_1.id, host: false)
+
+TripItem.create!(trip_id: trip_1.id, item_id: item_1.id)
+TripItem.create!(trip_id: trip_1.id, item_id: item_4.id)
+TripItem.create!(trip_id: trip_1.id, item_id: item_2.id)
+
+TripItem.create!(trip_id: trip_2.id, item_id: item_3.id)
+TripItem.create!(trip_id: trip_2.id, item_id: item_5.id)
