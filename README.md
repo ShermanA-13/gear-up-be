@@ -1,4 +1,4 @@
-# **Gear-UP-BE**
+# <a target="_blank" rel="noopener noreferrer" href="https://gearupbeta.herokuapp.com/">**Gear-UP**</a>
 
 ![languages](https://img.shields.io/github/languages/top/ShermanA-13/gear-up-be?color=red)
 ![rspec](https://img.shields.io/gem/v/rspec?color=blue&label=rspec)
@@ -12,13 +12,13 @@
 <hr>
 
 <p align="center">
-  <img src="./docs/images/gear_up_long_logo.png" alt="logo" width="80%"/>
+  <a href="https://gearupbeta.herokuapp.com/" target="_blank" rel="noopener noreferrer"><img src="./imgs/gear_up_long_logo.png" alt="logo" width="80%"/></a>
 </p>
 
 <hr>
 
 ## **Background and Description**
-
+<a href="https://gearupbeta.herokuapp.com" target="_blank" rel="noopener noreferrer">**Gear-UP**</a><br><br>
 Logistics for group adventures outdoors can be complicated, especially when it comes to getting all of your gear in order. __Gear Up__ simplifies this by giving users a platform to easily organize trips, decide who is bringing what gear, then determine what the group still needs and who might have that gear already!
 
 -[Gear Up BE](https://github.com/ShermanA-13/gear-up-be) is the "Back End" application that acts as a microservice for the [Gear UP FE](https://github.com/ShermanA-13/gear-up-fe) web application.
