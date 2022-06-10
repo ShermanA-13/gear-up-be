@@ -382,7 +382,7 @@ heroku run rake load_areas:areas
 From your Heroku dashboard, click on the project you just created, then Settings. In the Config Vars section, click Reveal Config Vars. Here, you can add any API keys with the constant name you gave them in the application.yml file created from the figaro gem.
 ```
 ## **Endpoints Provided**
-[Download the test suites for Postman:]()
+[Download the test suites for Postman:](https://github.com/ShermanA-13/gear-up-be/blob/main/docs/Gear%20Up%20BE.postman_collection.json)
 
 <details>
 <summary><b>Click to see example!</b></summary>
