@@ -23,6 +23,7 @@ class TripInfoSerializer
       start_date: trip.start_date,
       end_date: trip.end_date,
       host: User.find(trip.host_id).first_name,
+      host_id: trip.host_id,
       description: trip.description,
       lat: trip.area.lat,
       long: trip.area.long,
