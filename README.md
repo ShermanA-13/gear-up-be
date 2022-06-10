@@ -3,7 +3,7 @@
 ![languages](https://img.shields.io/github/languages/top/ShermanA-13/gear-up-be?color=red)
 ![rspec](https://img.shields.io/gem/v/rspec?color=blue&label=rspec)
 ![simplecov](https://img.shields.io/gem/v/simplecov?color=blue&label=simplecov) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/contributors-4-orange.svg?style=flat)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/contributors-6-orange.svg?style=flat)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 ![heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
 ![miro](https://img.shields.io/badge/Miro-050038?style=for-the-badge&logo=Miro&logoColor=white)
