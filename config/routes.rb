@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   # Areas Endpoints
   get "/api/v1/areas/find_all", to: "api/v1/areas#find_all"
-  get "/api/v1/areas/:id", to: "api/v1/areas#show"
+  get "/api/v1/areas/:area_id", to: "api/v1/areas#show"
 end
 
 # happy routes

@@ -1,4 +1,6 @@
 class Api::V1::AreasController < ApplicationController
+  before_action :set_area, only: [:show]
+
   def find_all
     if params[:name].nil? || params[:name].empty?
       error = Error.new(400, "EMPTY SEARCH", "Search can not be empty")
@@ -9,7 +11,6 @@ class Api::V1::AreasController < ApplicationController
   end
 
   def show
-    area = Area.find(params[:id])
-    render json: AreaSerializer.new(area)
+    render json: AreaSerializer.new(@area)
   end
 end
