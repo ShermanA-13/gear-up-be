@@ -17,6 +17,7 @@ class Api::V1::TripUsersController < ApplicationController
         TripUser.create(trip_id: @trip.id, user_id: user, host: false)
       end
     end
+    params[:users] << @trip.host_id
     @trip.users_to_remove(params[:users]).each { |user| user.destroy }
     render status: 200, json: TripSerializer.new(@trip)
   end
