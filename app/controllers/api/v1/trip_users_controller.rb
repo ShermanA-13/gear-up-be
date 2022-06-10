@@ -18,6 +18,6 @@ class Api::V1::TripUsersController < ApplicationController
       end
     end
     @trip.users_to_remove(params[:users]).each { |user| user.destroy }
-    render status: 200
+    render status: 200, json: TripSerializer.new(@trip)
   end
 end
