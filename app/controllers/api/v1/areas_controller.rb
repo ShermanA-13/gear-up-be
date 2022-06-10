@@ -1,4 +1,6 @@
 class Api::V1::AreasController < ApplicationController
+  before_action :set_area, only: [:show]
+
   def find_all
     if params[:name].nil? || params[:name].empty?
       error = Error.new(400, "EMPTY SEARCH", "Search can not be empty")
