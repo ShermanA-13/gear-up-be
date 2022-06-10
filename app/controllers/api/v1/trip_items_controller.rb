@@ -30,11 +30,12 @@ class Api::V1::TripItemsController < ApplicationController
 
   def update
     if !params[:items].nil?
-      params[:items].each do |item|
-        if !TripItem.exists?(item_id: item, trip_id: @trip.id)
-          TripItem.create(trip_id: @trip.id, item_id: item)
-        end
-      end
+      # params[:items].each do |item|
+      #   if !TripItem.exists?(item_id: item, trip_id: @trip.id)
+      #     TripItem.create(trip_id: @trip.id, item_id: item)
+      #   end
+      # end
+      create_missing_trip_items(params[:items])
       @user.missing_trip_items(params[:items], @trip).each { |item| item.destroy }
     else
       @user.trip_items_delete(@trip.id).each {|item| item.destroy}
@@ -46,5 +47,13 @@ class Api::V1::TripItemsController < ApplicationController
 
   def trip_item_params
     params.require(:trip_item).permit(:trip_id, :item_id)
+  end
+
+  def create_missing_trip_items(items)
+    items.each do |item|
+      if !TripItem.exists?(item_id: item, trip_id: @trip.id)
+        TripItem.create(trip_id: @trip.id, item_id: item)
+      end
+    end
   end
 end
