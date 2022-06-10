@@ -11,7 +11,6 @@ class Api::V1::AreasController < ApplicationController
   end
 
   def show
-    area = Area.find(params[:area_id])
-    render json: AreaSerializer.new(area)
+    render json: AreaSerializer.new(@area)
   end
 end
