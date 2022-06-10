@@ -18,13 +18,12 @@
 <hr>
 
 ## **Background and Description**
-Logistics for group adventures outdoors can be quite complicated. Gear UP is a web app that simplifies this issue by giving groups a platform to organize gear and who is responsible for bringing what.
 
-[Gear Up BE](https://github.com/ShermanA-13/gear-up-be) is the "Back End" application that acts as a microservice for the [Gear UP FE](https://github.com/ShermanA-13/gear-up-fe) web application.
+Logistics for group adventures outdoors can be complicated, especially when it comes to getting all of your gear in order. __Gear Up__ simplifies this by giving users a platform to easily organize trips, decide who is bringing what gear, then determine what the group still needs and who might have that gear already!
 
-[Consultancy Competition](https://backend.turing.edu/module3/projects/consultancy)<br>
-
-[MiroBoard](https://miro.com/app/board/uXjVOw873iE=/?share_link_id=273903554758)<br>
+-[Gear Up BE](https://github.com/ShermanA-13/gear-up-be) is the "Back End" application that acts as a microservice for the [Gear UP FE](https://github.com/ShermanA-13/gear-up-fe) web application.
+-[Consultancy Competition](https://backend.turing.edu/module3/projects/consultancy)<br>
+-[MiroBoard](https://miro.com/app/board/uXjVOw873iE=/?share_link_id=273903554758)<br>
 
 ## **Table of Contents**
 - [Background and Description](#background-and-description)
@@ -425,7 +424,9 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
 
    <td align="center"><a href="https://github.com/sandisz-d734m37"><img src="https://avatars.githubusercontent.com/u/94508708?v=4" width="100px;" alt=""/><br /><sub><b>Sandiz T. (he/him)</b></sub></a><br /><a href="https://www.linkedin.com/in/sandisz-thieme-25335316a/" title ="Linked In"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a><br /><a href="https://github.com/ShermanA-13/gear-up-be/commits?author=sandisz-d734m37" title="Code">💻</a> <a href="" title="Ideas, Planning, & Feedback">�</a> <a href="" title="Tests">⚠️</a> <a href="https://github.com/ShermanA-13/gear-up-be/pulls?q=is%3Apr+author%3Asandisz-d734m37" title="Reviewed Pull Requests">👀</a></td>
 
+   <td align="center"><a href="https://github.com/johnny-bowman"><img src="https://avatars.githubusercontent.com/u/95893959?v=4" width="100px;" alt=""/><br /><sub><b>Sandiz T. (he/him)</b></sub></a><br /><a href="https://www.linkedin.com/in/johnnybowmansoftware/" title ="Linked In"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a><br /><a href="https://github.com/ShermanA-13/gear-up-be/commits?author=johnny-bowman" title="Code">💻</a> <a href="" title="Ideas, Planning, & Feedback">�</a> <a href="" title="Tests">⚠️</a> <a href="https://github.com/ShermanA-13/gear-up-be/pulls?q=is%3Apr+author%3Ajohnny-bowman+" title="Reviewed Pull Requests">👀</a></td>
 
+   <td align="center"><a href="https://github.com/sandisz-d734m37"><img src="https://avatars.githubusercontent.com/u/94508708?v=4" width="100px;" alt=""/><br /><sub><b>Sandiz T. (he/him)</b></sub></a><br /><a href="https://www.linkedin.com/in/sandisz-thieme-25335316a/" title ="Linked In"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a><br /><a href="https://github.com/ShermanA-13/gear-up-be/commits?author=AliciaWatt" title="Code">💻</a> <a href="" title="Ideas, Planning, & Feedback">�</a> <a href="" title="Tests">⚠️</a> <a href="https://github.com/ShermanA-13/gear-up-be/pulls?q=is%3Apr+author%3AAliciaWatt" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
@@ -436,8 +437,3 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
 <!--
-
-
-git remote add origin git@github.com:ShermanA-13/realational_rails.git
-git branch -M main
-git push -u origin main
