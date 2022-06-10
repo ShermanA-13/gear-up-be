@@ -85,13 +85,15 @@ Our “Back End” application will be an API built in Rails. It will act as the
 - [Google OAuth 2.0](https://developers.google.com/identity/protocols/oauth2)
 ## **Setup**
 1. Create a Base Directory
+* On your local machine open a terminal session and enter the following commands to create a base directory for the app.
+
 ```shell
 $ mkdir gear_up
+$ cd gear_up
 ```
 
-2. Clone this repository:
-On your local machine open a terminal session and enter the following commands for SSH or HTTPS to clone the repositiory.
-
+2. Clone these repositories:
+* On your local machine open a terminal session and enter the following commands for SSH or HTTPS to clone the [back end](#background-and-description) repositiory.
 
 - using ssh key <br>
 ```shell
@@ -103,13 +105,25 @@ $ git clone git@github.com:ShermanA-13/gear-up-be.git
 $ git clone https://github.com/ShermanA-13/gear-up-be.git
 ```
 
-Once cloned, you'll have a new local copy in the directory you ran the clone command in.<br>
+* Once cloned, enter the following commands for SSH or HTTPS to clone the [front end](#background-and-description) repositiory.
 
-3. Change to the project directory:<br>
-In terminal, use `$ cd` to navigate to the backend Application project directory.
-
+- using ssh key <br>
 ```shell
-$ cd relational_rails
+$ git clone git@github.com:ShermanA-13/gear-up-fe.git
+```
+
+- using https <br>
+```shell
+$ git clone https://github.com/ShermanA-13/gear-up-fe.git
+```
+
+
+* Once cloned, you'll have a new local copies of the directories you ran the clone command in. You can check what is in the directory by running the following command<br>
+
+```sh
+$ ls
+#ex.
+  gear-up-be gear-up-fe
 ```
 
 4. Install required Gems utilizing Bundler: <br>
