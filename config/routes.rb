@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   # Areas Endpoints
   get "/api/v1/areas/find_all", to: "api/v1/areas#find_all"
   get "/api/v1/areas/:area_id", to: "api/v1/areas#show"
+
+  # Comments Endpoints
+  post "/api/v1/comments", to: "api/v1/comments#create"
 end
 
 # happy routes

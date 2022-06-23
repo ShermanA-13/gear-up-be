@@ -18,6 +18,9 @@ RSpec.describe "Comments API requests" do
       post "/api/v1/comments", headers: headers, params: JSON.generate(comment: comment_params)
 
       expect(response).to be_successful
+      comment_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(comment_response[:success]).to eq("Comment Created")
     end
   end
 end
