@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:items) }
     it { should have_many(:trip_items).through(:items) }
     it { should have_many(:trip_users) }
+    it { should have_many(:comments) }
     it { should have_many(:trips).through(:trip_users) }
   end
 
