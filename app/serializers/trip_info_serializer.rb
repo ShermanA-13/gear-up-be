@@ -49,6 +49,13 @@ class TripInfoSerializer
               owner: item.user.first_name
             }
           end,
+      comments: trip.comments.map do |comment|
+            {
+              user_name: "#{comment.user.first_name} #{comment.user.last_name}",
+              user_id: comment.user.id,
+              message: comment.message
+            }
+          end,
       weather: if weather.class == String
                   weather
               else
