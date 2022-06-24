@@ -41,7 +41,8 @@ Rails.application.routes.draw do
   get "/api/v1/areas/:area_id", to: "api/v1/areas#show"
 
   # Comments Endpoints
-  post "/api/v1/comments", to: "api/v1/comments#create"
+  post "/api/v1/trips/:trip_id/:user_id/comments", to: "api/v1/comments#create"
+  delete "/api/v1/trips/:trip_id/comments/:comment_id", to: "api/v1/comments#destroy"
 end
 
 # happy routes
