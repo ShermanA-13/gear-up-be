@@ -43,6 +43,18 @@ RSpec.describe "Comments API requests" do
       comment_response = JSON.parse(response.body, symbolize_names: true)
       expect(comment_response).to have_key(:errors)
     end
+
+    it 'throws an error if the comment is blank' do
+      comment_params = {
+        message: ""
+      }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v1/trips/#{trip.id}/#{user_list.first.id}/comments", headers: headers, params: JSON.generate(comment: comment_params)
+
+      comment_response = JSON.parse(response.body, symbolize_names: true)
+      expect(comment_response).to have_key(:errors)
+    end
   end
 
   describe 'deleting a comment' do

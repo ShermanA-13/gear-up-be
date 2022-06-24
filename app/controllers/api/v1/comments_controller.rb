@@ -7,6 +7,8 @@ class Api::V1::CommentsController < ApplicationController
     comment.update(trip: @trip, user: @user)
     if comment.save
       render json: {success: "Comment Created"}, status: :created
+    else
+      database_error(comment)
     end
   end
 

@@ -81,7 +81,7 @@ RSpec.describe 'Trips API' do
       get "/api/v1/trips/#{trip.id}"
 
       trips_response = JSON.parse(response.body, symbolize_names: true)
-
+      
       expect(response).to be_successful
 
       expect(trips_response).to have_key(:id)
