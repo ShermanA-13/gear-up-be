@@ -7,7 +7,7 @@ class WeathersFacade
         sunset = json[:city][:sunset]
         data = json[:list].map { |w_data| Weather.new(w_data, sunrise, sunset) }
       else
-        "Weather is currently Unavailable"
+        Weather.new("no data", nil, nil)
       end
     end
   end
