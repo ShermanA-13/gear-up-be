@@ -57,5 +57,25 @@ RSpec.describe "Comments API requests" do
       expect(Comment.all.count).to eq(0)
       expect(comment_response[:success]).to eq("Comment Deleted")
     end
+
+    it 'throws an error if the trip does not exist' do
+      comment = Comment.create!(trip: trip, user: user_list.first, message: "This is gonna be sick!")
+
+      expect(Comment.all.count).to eq(1)
+      delete "/api/v1/trips/#{trip.id + 1}/comments/#{comment.id}"
+
+      comment_response = JSON.parse(response.body, symbolize_names: true)
+      expect(comment_response).to have_key(:errors)
+    end
+
+    it 'throws an error if the comment does not exist' do
+      comment = Comment.create!(trip: trip, user: user_list.first, message: "This is gonna be sick!")
+
+      expect(Comment.all.count).to eq(1)
+      delete "/api/v1/trips/#{trip.id}/comments/#{comment.id + 1}"
+
+      comment_response = JSON.parse(response.body, symbolize_names: true)
+      expect(comment_response).to have_key(:errors)
+    end
   end
 end
