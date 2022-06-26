@@ -1,6 +1,7 @@
 class Trip < ApplicationRecord
   has_many :trip_items, dependent: :destroy
   has_many :trip_users, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :users, through: :trip_users
   has_many :items, through: :trip_items
   belongs_to :area

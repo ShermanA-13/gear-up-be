@@ -74,10 +74,14 @@ RSpec.describe 'Trips API' do
       trip_item1 = TripItem.create!(trip: trip, item: user_2_items[0])
       trip_item1 = TripItem.create!(trip: trip, item: user_2_items[1])
 
+      comment_1 = trip.comments.create!(user: users[0], message: "Wooo!")
+      comment_2 = trip.comments.create!(user: users[2], message: "Yessss!")
+      comment_3 = trip.comments.create!(user: users[3], message: "So fun!")
+
       get "/api/v1/trips/#{trip.id}"
 
       trips_response = JSON.parse(response.body, symbolize_names: true)
-
+      
       expect(response).to be_successful
 
       expect(trips_response).to have_key(:id)
@@ -104,6 +108,11 @@ RSpec.describe 'Trips API' do
       expect(trips_response[:items].first[:count]).to be_an Integer
       expect(trips_response[:items].first[:category]).to be_an Integer
       expect(trips_response[:items].first[:owner]).to be_an String
+      expect(trips_response[:comments]).to be_an Array
+      expect(trips_response[:comments].first[:user_name]).to be_a String
+      expect(trips_response[:comments].first[:user_id]).to be_an Integer
+      # expect(trips_response[:comments].first[:user_photo]).to be_a String
+      expect(trips_response[:comments].first[:message]).to be_a String
       expect(trips_response[:weather]).to be_a Hash
       expect(trips_response[:weather][:forecast]).to be_an Array
       expect(trips_response[:weather][:forecast].first).to be_a Hash

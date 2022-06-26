@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :items, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :trip_items, through: :items
   has_many :trip_users, dependent: :destroy
   has_many :trips, through: :trip_users

@@ -5,6 +5,7 @@ RSpec.describe Trip, type: :model do
     it { should belong_to :area }
     it { should have_many :trip_items }
     it { should have_many :trip_users }
+    it { should have_many :comments }
     it { should have_many(:users).through(:trip_users) }
     it { should have_many(:items).through(:trip_items) }
   end
