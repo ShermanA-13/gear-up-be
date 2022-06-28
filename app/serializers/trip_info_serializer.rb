@@ -39,6 +39,7 @@ class TripInfoSerializer
               user_name: "#{comment.user.first_name} #{comment.user.last_name}",
               user_id: comment.user.id,
               user_photo: comment.user.user_photo,
+              created_at: comment.created_at,
               message: comment.message
             }
           end,
