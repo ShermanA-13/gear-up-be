@@ -111,7 +111,7 @@ RSpec.describe 'Trips API' do
       expect(trips_response[:comments]).to be_an Array
       expect(trips_response[:comments].first[:user_name]).to be_a String
       expect(trips_response[:comments].first[:user_id]).to be_an Integer
-      # expect(trips_response[:comments].first[:user_photo]).to be_a String
+      expect(trips_response[:comments].first[:created_at]).to be_a String
       expect(trips_response[:comments].first[:message]).to be_a String
       expect(trips_response[:weather]).to be_a Hash
       expect(trips_response[:weather][:forecast]).to be_an Array
