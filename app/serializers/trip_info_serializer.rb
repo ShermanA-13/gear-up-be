@@ -36,6 +36,7 @@ class TripInfoSerializer
           end,
       comments: trip.comments.map do |comment|
             {
+              id: comment.id,
               user_name: "#{comment.user.first_name} #{comment.user.last_name}",
               user_id: comment.user.id,
               user_photo: comment.user.user_photo,
